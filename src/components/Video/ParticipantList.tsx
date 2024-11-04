@@ -1,3 +1,5 @@
+"use client";
+
 import { List, Button, Typography, Avatar } from "antd";
 import { AudioMutedOutlined, AudioOutlined } from "@ant-design/icons";
 

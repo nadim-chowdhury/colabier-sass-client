@@ -1,5 +1,7 @@
-import { Form, Input, Button, Typography } from "antd";
+"use client";
+
 import { useState } from "react";
+import { Form, Input, Button, Typography } from "antd";
 
 const { Text } = Typography;
 

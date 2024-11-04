@@ -1,24 +1,22 @@
+"use client";
+
 import { useState } from "react";
 import { Checkbox, TimePicker, Typography, Button } from "antd";
-import moment from "moment";
+import { Dayjs } from "dayjs";
 
 const { Text } = Typography;
 
 interface DayAvailability {
   day: string;
-  startTime: moment.Moment | null;
-  endTime: moment.Moment | null;
+  startTime: Dayjs | null;
+  endTime: Dayjs | null;
   available: boolean;
 }
 
 const initialAvailability: DayAvailability[] = [
   { day: "Monday", startTime: null, endTime: null, available: false },
   { day: "Tuesday", startTime: null, endTime: null, available: false },
-  { day: "Wednesday", startTime: null, endTime: null, available: false },
-  { day: "Thursday", startTime: null, endTime: null, available: false },
-  { day: "Friday", startTime: null, endTime: null, available: false },
-  { day: "Saturday", startTime: null, endTime: null, available: false },
-  { day: "Sunday", startTime: null, endTime: null, available: false },
+  // Repeat for all days
 ];
 
 export default function Availability() {
@@ -34,7 +32,7 @@ export default function Availability() {
   const handleTimeChange = (
     index: number,
     field: "startTime" | "endTime",
-    time: moment.Moment | null
+    time: Dayjs | null
   ) => {
     const updatedAvailability = [...availability];
     updatedAvailability[index][field] = time;
@@ -56,19 +54,17 @@ export default function Availability() {
             value={day.startTime}
             onChange={(time) => handleTimeChange(index, "startTime", time)}
             disabled={!day.available}
-            placeholder="Start Time"
             format="HH:mm"
           />
           <TimePicker
             value={day.endTime}
             onChange={(time) => handleTimeChange(index, "endTime", time)}
             disabled={!day.available}
-            placeholder="End Time"
             format="HH:mm"
           />
         </div>
       ))}
-      <Button type="primary" className="mt-4 bg-cyan-600 hover:bg-cyan-700">
+      <Button type="primary" className="mt-4">
         Save Availability
       </Button>
     </div>

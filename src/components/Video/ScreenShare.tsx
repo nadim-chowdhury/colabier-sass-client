@@ -1,6 +1,8 @@
+"use client";
+
 import { useState } from "react";
 import { Button, Typography } from "antd";
-import { ScreenOutlined, StopOutlined } from "@ant-design/icons";
+import { FullscreenOutlined, StopOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;
 
@@ -35,7 +37,7 @@ export default function ScreenShare() {
       <Text className="text-lg font-semibold">Screen Sharing</Text>
       <Button
         type="primary"
-        icon={isSharing ? <StopOutlined /> : <ScreenOutlined />}
+        icon={isSharing ? <StopOutlined /> : <FullscreenOutlined />}
         onClick={isSharing ? stopScreenShare : startScreenShare}
         className="mt-4"
       >

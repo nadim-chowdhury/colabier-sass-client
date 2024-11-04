@@ -1,5 +1,7 @@
-import { Button, Typography } from "antd";
+"use client";
+
 import { useState } from "react";
+import { Button, Typography } from "antd";
 import { PlayCircleOutlined, StopOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;

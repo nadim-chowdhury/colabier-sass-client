@@ -1,3 +1,5 @@
+"use client";
+
 import { Badge, Button } from "antd";
 import { BellOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";

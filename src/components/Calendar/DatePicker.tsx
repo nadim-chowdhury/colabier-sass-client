@@ -1,5 +1,7 @@
+"use client";
+
 import { DatePicker } from "antd";
-import moment from "moment";
+import dayjs, { Dayjs } from "dayjs";
 
 interface DatePickerComponentProps {
   selectedDate: Date | null;
@@ -12,8 +14,8 @@ export default function DatePickerComponent({
 }: DatePickerComponentProps) {
   return (
     <DatePicker
-      value={selectedDate ? moment(selectedDate) : null}
-      onChange={(date) => onChange(date ? date.toDate() : null)}
+      value={selectedDate ? dayjs(selectedDate) : null}
+      onChange={(date: Dayjs | null) => onChange(date ? date.toDate() : null)}
       format="YYYY-MM-DD"
       className="w-full"
     />

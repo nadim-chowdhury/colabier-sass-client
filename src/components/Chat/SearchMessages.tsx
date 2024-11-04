@@ -1,6 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import { Input, Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { useState } from "react";
 
 interface SearchMessagesProps {
   onSearch: (query: string) => void;

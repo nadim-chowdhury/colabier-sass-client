@@ -1,10 +1,12 @@
+"use client";
+
 import { Menu, Typography, DatePicker } from "antd";
 import {
   FilterOutlined,
   SettingOutlined,
   CalendarOutlined,
 } from "@ant-design/icons";
-import { useState } from "react";
+import { Dayjs } from "dayjs";
 
 const { Text } = Typography;
 
@@ -17,13 +19,12 @@ export default function Sidebar({
   onFilterChange,
   onSettingsClick,
 }: SidebarProps) {
-  const [dateRange, setDateRange] = useState<[Date, Date] | null>(null);
-
-  const handleDateChange = (dates: [moment.Moment, moment.Moment] | null) => {
-    if (dates) {
+  const handleDateChange = (dates: [Dayjs | null, Dayjs | null] | null) => {
+    if (dates && dates[0] && dates[1]) {
       const range: [Date, Date] = [dates[0].toDate(), dates[1].toDate()];
-      setDateRange(range);
       onFilterChange({ dateRange: range });
+    } else {
+      onFilterChange({ dateRange: undefined });
     }
   };
 

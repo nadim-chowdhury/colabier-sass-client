@@ -1,7 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import { Button, Upload, Typography } from "antd";
 import ColorPicker from "./ColorPicker";
 import { UploadOutlined } from "@ant-design/icons";
-import { useState } from "react";
 
 const { Text } = Typography;
 

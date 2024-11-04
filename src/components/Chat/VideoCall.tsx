@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Button, Typography } from "antd";
 import {
@@ -80,7 +82,7 @@ export default function VideoCall() {
           Video
         </Button>
         <Button
-          type="danger"
+          // type="danger"
           icon={<PhoneOutlined />}
           className="bg-red-600 hover:bg-red-700"
         >

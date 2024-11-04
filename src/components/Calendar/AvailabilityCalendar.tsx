@@ -1,22 +1,24 @@
-import { Calendar, Typography, Checkbox, TimePicker } from "antd";
-import moment from "moment";
+"use client";
+
 import { useState } from "react";
+import { Calendar, Typography, Checkbox, TimePicker } from "antd";
+import { Dayjs } from "dayjs";
 
 const { Text } = Typography;
 
 interface Availability {
   date: Date;
-  startTime: moment.Moment | null;
-  endTime: moment.Moment | null;
+  startTime: Dayjs | null;
+  endTime: Dayjs | null;
   available: boolean;
 }
 
 export default function AvailabilityCalendar() {
   const [availability, setAvailability] = useState<Availability[]>([]);
 
-  const handleDateSelect = (date: moment.Moment) => {
+  const handleDateSelect = (date: Dayjs) => {
     const dateString = date.toDate().toDateString();
-    if (!availability.find((av) => av.date.toDateString() === dateString)) {
+    if (!availability.some((av) => av.date.toDateString() === dateString)) {
       setAvailability([
         ...availability,
         {
@@ -32,7 +34,7 @@ export default function AvailabilityCalendar() {
   const handleTimeChange = (
     date: Date,
     field: "startTime" | "endTime",
-    time: moment.Moment | null
+    time: Dayjs | null
   ) => {
     const updatedAvailability = availability.map((av) =>
       av.date.toDateString() === date.toDateString()
@@ -42,12 +44,22 @@ export default function AvailabilityCalendar() {
     setAvailability(updatedAvailability);
   };
 
+  const toggleAvailability = (date: Date) => {
+    setAvailability((prevAvailability) =>
+      prevAvailability.map((av) =>
+        av.date.toDateString() === date.toDateString()
+          ? { ...av, available: !av.available }
+          : av
+      )
+    );
+  };
+
   return (
     <div className="p-4 bg-white rounded-lg shadow-md">
       <Text className="text-lg font-semibold mb-4">Set Your Availability</Text>
       <Calendar
         fullscreen={false}
-        onSelect={(date) => handleDateSelect(date)}
+        onSelect={handleDateSelect}
         className="mb-4"
       />
 
@@ -59,14 +71,7 @@ export default function AvailabilityCalendar() {
           >
             <Checkbox
               checked={av.available}
-              onChange={() => {
-                const updatedAvailability = availability.map((item) =>
-                  item.date === av.date
-                    ? { ...item, available: !av.available }
-                    : item
-                );
-                setAvailability(updatedAvailability);
-              }}
+              onChange={() => toggleAvailability(av.date)}
             >
               {av.date.toDateString()}
             </Checkbox>

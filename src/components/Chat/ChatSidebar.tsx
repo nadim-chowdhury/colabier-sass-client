@@ -1,7 +1,7 @@
 "use client";
 
 import { Avatar, Typography, List, Divider } from "antd";
-import { UsergroupAddOutlined, MessageOutlined } from "@ant-design/icons";
+import { MessageOutlined } from "@ant-design/icons";
 
 const { Text } = Typography;
 

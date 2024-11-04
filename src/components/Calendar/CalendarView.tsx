@@ -1,7 +1,8 @@
+"use client";
+
 import { useState } from "react";
-import { Button, Typography, Dropdown, Menu } from "antd";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import { Button, Typography, Dropdown, MenuProps } from "antd";
+import Calendar, { CalendarProps } from "react-calendar";
 import EventCard from "./EventCard";
 
 const { Title } = Typography;
@@ -15,7 +16,7 @@ export default function CalendarView({
   events,
   onSelectEvent,
 }: CalendarViewProps) {
-  const [view, setView] = useState("month"); // Switch between "day", "week", "month" views
+  const [view, setView] = useState("month");
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
   const handleViewChange = (view: string) => setView(view);
@@ -32,25 +33,33 @@ export default function CalendarView({
       ));
   };
 
+  const handleDateChange: CalendarProps["onChange"] = (value) => {
+    if (value instanceof Date) {
+      setSelectedDate(value);
+    }
+  };
+
+  const viewMenuItems: MenuProps["items"] = [
+    { key: "day", label: "Day View" },
+    { key: "week", label: "Week View" },
+    { key: "month", label: "Month View" },
+  ];
+
+  const viewMenu: MenuProps = {
+    items: viewMenuItems,
+    onClick: (e) => handleViewChange(e.key),
+  };
+
   return (
     <div className="p-4 bg-white rounded-lg shadow-md">
       <div className="flex justify-between items-center mb-4">
         <Title level={4}>Calendar</Title>
-        <Dropdown
-          overlay={
-            <Menu onClick={(e) => handleViewChange(e.key)}>
-              <Menu.Item key="day">Day View</Menu.Item>
-              <Menu.Item key="week">Week View</Menu.Item>
-              <Menu.Item key="month">Month View</Menu.Item>
-            </Menu>
-          }
-        >
+        <Dropdown menu={viewMenu}>
           <Button>View: {view.charAt(0).toUpperCase() + view.slice(1)}</Button>
         </Dropdown>
       </div>
-
       <Calendar
-        onChange={setSelectedDate}
+        onChange={handleDateChange}
         value={selectedDate}
         tileContent={({ date }) => <div>{renderEvents(date)}</div>}
       />

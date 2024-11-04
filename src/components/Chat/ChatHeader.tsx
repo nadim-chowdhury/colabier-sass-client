@@ -1,3 +1,5 @@
+"use client";
+
 import { Avatar, Typography, Button, Tooltip } from "antd";
 import {
   PhoneOutlined,

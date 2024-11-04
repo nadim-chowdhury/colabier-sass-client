@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+"use client";
+
+import { useState } from "react";
 import ParticipantVideo from "./ParticipantVideo";
 import VideoControls from "./VideoControls";
 import { Button, Typography } from "antd";

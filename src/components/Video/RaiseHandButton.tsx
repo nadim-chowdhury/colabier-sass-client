@@ -1,6 +1,8 @@
+"use client";
+
 import { Button } from "antd";
 import { useState } from "react";
-import { HandOutlined, CheckOutlined } from "@ant-design/icons";
+import { UpOutlined, CheckOutlined } from "@ant-design/icons";
 
 interface RaiseHandButtonProps {
   onRaiseHand: () => void;
@@ -25,7 +27,7 @@ export default function RaiseHandButton({
   return (
     <Button
       type={isHandRaised ? "default" : "primary"}
-      icon={isHandRaised ? <CheckOutlined /> : <HandOutlined />}
+      icon={isHandRaised ? <CheckOutlined /> : <UpOutlined />}
       onClick={toggleHand}
     >
       {isHandRaised ? "Lower Hand" : "Raise Hand"}

@@ -1,13 +1,15 @@
+"use client";
+
+import { useState } from "react";
 import { Button, Dropdown, Menu, Typography } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { useState } from "react";
 
 const { Title } = Typography;
 
 interface CalendarHeaderProps {
   currentDate: Date;
   onDateChange: (newDate: Date) => void;
-  onViewChange: (view: string) => void;
+  onViewChange: (view: "day" | "week" | "month") => void;
 }
 
 export default function CalendarHeader({
@@ -19,35 +21,35 @@ export default function CalendarHeader({
 
   const handlePrev = () => {
     const newDate = new Date(currentDate);
-    newDate.setMonth(newDate.getMonth() - 1);
+    if (view === "month") newDate.setMonth(newDate.getMonth() - 1);
+    else if (view === "week") newDate.setDate(newDate.getDate() - 7);
+    else newDate.setDate(newDate.getDate() - 1);
     onDateChange(newDate);
   };
 
   const handleNext = () => {
     const newDate = new Date(currentDate);
-    newDate.setMonth(newDate.getMonth() + 1);
+    if (view === "month") newDate.setMonth(newDate.getMonth() + 1);
+    else if (view === "week") newDate.setDate(newDate.getDate() + 7);
+    else newDate.setDate(newDate.getDate() + 1);
     onDateChange(newDate);
   };
 
-  const handleViewChange = (view: string) => {
+  const handleViewChange = (view: "day" | "week" | "month") => {
     setView(view);
     onViewChange(view);
   };
 
   return (
-    <div className="flex items-center justify-between p-4 bg-white shadow-md rounded-lg">
+    <div className="flex items-center justify-between p-4 bg-white shadow-md">
       <Button icon={<LeftOutlined />} onClick={handlePrev} />
-      <Title level={4}>
-        {currentDate.toLocaleDateString("en-US", {
-          month: "long",
-          year: "numeric",
-        })}
-      </Title>
+      <Title level={4}>{currentDate.toDateString()}</Title>
       <Button icon={<RightOutlined />} onClick={handleNext} />
-
       <Dropdown
         overlay={
-          <Menu onClick={(e) => handleViewChange(e.key)}>
+          <Menu
+            onClick={(e) => handleViewChange(e.key as "day" | "week" | "month")}
+          >
             <Menu.Item key="day">Day View</Menu.Item>
             <Menu.Item key="week">Week View</Menu.Item>
             <Menu.Item key="month">Month View</Menu.Item>

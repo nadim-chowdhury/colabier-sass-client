@@ -1,29 +1,50 @@
-import { useState } from "react";
+"use client";
+
+import { useState, Suspense } from "react";
 import { Popover, Button } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
-import { Picker, EmojiData } from "emoji-mart";
+import dynamic from "next/dynamic";
 import "emoji-mart/css/emoji-mart.css"; // Import EmojiMart styles
+
+// Define a custom type for emojis
+interface CustomEmoji {
+  native: string;
+}
+
+// Dynamic import with `unknown` cast for compatibility
+const Picker = dynamic(
+  () =>
+    import("emoji-mart").then(
+      (mod) =>
+        mod.Picker as unknown as React.ComponentType<{
+          onSelect: (emoji: CustomEmoji) => void;
+        }>
+    ),
+  { ssr: false }
+);
 
 interface EmojiPickerProps {
   onSelectEmoji: (emoji: string) => void;
 }
 
 export default function EmojiPicker({ onSelectEmoji }: EmojiPickerProps) {
-  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const handleSelect = (emoji: EmojiData) => {
-    if ("native" in emoji) {
-      onSelectEmoji(emoji.native);
-    }
-    setVisible(false);
+  const handleSelect = (emoji: CustomEmoji) => {
+    onSelectEmoji(emoji.native);
+    setOpen(false);
   };
 
   return (
     <Popover
-      content={<Picker onSelect={handleSelect} />}
+      content={
+        <Suspense fallback={<div>Loading...</div>}>
+          <Picker onSelect={handleSelect} />
+        </Suspense>
+      }
       trigger="click"
-      visible={visible}
-      onVisibleChange={(v) => setVisible(v)}
+      open={open}
+      onOpenChange={(v) => setOpen(v)}
     >
       <Button
         icon={<SmileOutlined />}

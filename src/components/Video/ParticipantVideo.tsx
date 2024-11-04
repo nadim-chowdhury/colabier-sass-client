@@ -1,5 +1,12 @@
-import { Typography, Avatar } from "antd";
-import { AudioMutedOutlined, VideoCameraOutlined } from "@ant-design/icons";
+"use client";
+
+import { Typography, Avatar, Button } from "antd";
+import {
+  AudioMutedOutlined,
+  VideoCameraOutlined,
+  AudioOutlined,
+  VideoCameraAddOutlined,
+} from "@ant-design/icons";
 
 const { Text } = Typography;
 
@@ -40,6 +47,32 @@ export default function ParticipantVideo({
         {!participant.isVideoOn && (
           <VideoCameraOutlined style={{ fontSize: 20 }} />
         )}
+      </div>
+
+      {/* Toggle Mute and Video Buttons */}
+      <div className="absolute top-2 right-2 flex space-x-2">
+        <Button
+          type="primary"
+          shape="circle"
+          icon={
+            participant.isMuted ? <AudioOutlined /> : <AudioMutedOutlined />
+          }
+          onClick={onToggleMute}
+          title="Toggle Mute"
+        />
+        <Button
+          type="primary"
+          shape="circle"
+          icon={
+            participant.isVideoOn ? (
+              <VideoCameraOutlined />
+            ) : (
+              <VideoCameraAddOutlined />
+            )
+          }
+          onClick={onToggleVideo}
+          title="Toggle Video"
+        />
       </div>
     </div>
   );

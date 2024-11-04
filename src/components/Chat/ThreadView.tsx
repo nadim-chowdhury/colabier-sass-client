@@ -1,4 +1,6 @@
-import { List, Avatar, Typography } from "antd";
+"use client";
+
+import { List, Typography } from "antd";
 import MessageInput from "./MessageInput";
 import MessageItem from "./MessageItem";
 

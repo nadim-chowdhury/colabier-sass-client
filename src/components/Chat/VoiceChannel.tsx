@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Avatar, Button, Typography, List } from "antd";
 import { AudioOutlined, AudioMutedOutlined } from "@ant-design/icons";

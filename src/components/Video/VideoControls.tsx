@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "antd";
 import {
   AudioMutedOutlined,
@@ -5,7 +8,6 @@ import {
   VideoCameraOutlined,
   VideoCameraAddOutlined,
 } from "@ant-design/icons";
-import { useState } from "react";
 
 interface VideoControlsProps {
   onMute: () => void;

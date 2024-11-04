@@ -1,5 +1,7 @@
-import { Button, Modal } from "antd";
+"use client";
+
 import { useState } from "react";
+import { Button, Modal } from "antd";
 import { PhoneOutlined } from "@ant-design/icons";
 
 interface EndCallButtonProps {

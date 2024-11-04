@@ -1,5 +1,7 @@
-import { Select, Typography } from "antd";
+"use client";
+
 import { useEffect, useState } from "react";
+import { Select, Typography } from "antd";
 
 const { Text } = Typography;
 const { Option } = Select;
