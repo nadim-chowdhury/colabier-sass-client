@@ -1,0 +1,61 @@
+import { Menu, Typography, DatePicker } from "antd";
+import {
+  FilterOutlined,
+  SettingOutlined,
+  CalendarOutlined,
+} from "@ant-design/icons";
+import { useState } from "react";
+
+const { Text } = Typography;
+
+interface SidebarProps {
+  onFilterChange: (filter: { dateRange?: [Date, Date]; type?: string }) => void;
+  onSettingsClick: () => void;
+}
+
+export default function Sidebar({
+  onFilterChange,
+  onSettingsClick,
+}: SidebarProps) {
+  const [dateRange, setDateRange] = useState<[Date, Date] | null>(null);
+
+  const handleDateChange = (dates: [moment.Moment, moment.Moment] | null) => {
+    if (dates) {
+      const range: [Date, Date] = [dates[0].toDate(), dates[1].toDate()];
+      setDateRange(range);
+      onFilterChange({ dateRange: range });
+    }
+  };
+
+  return (
+    <div className="p-4 bg-gray-100 h-full">
+      <Text className="text-lg font-semibold mb-4">Calendar Filters</Text>
+      <Menu
+        mode="inline"
+        defaultSelectedKeys={["1"]}
+        className="bg-transparent"
+      >
+        <Menu.Item key="1" icon={<CalendarOutlined />}>
+          <DatePicker.RangePicker onChange={handleDateChange} />
+        </Menu.Item>
+        <Menu.Item
+          key="2"
+          icon={<FilterOutlined />}
+          onClick={() => onFilterChange({ type: "Meeting" })}
+        >
+          Meetings
+        </Menu.Item>
+        <Menu.Item
+          key="3"
+          icon={<FilterOutlined />}
+          onClick={() => onFilterChange({ type: "Appointment" })}
+        >
+          Appointments
+        </Menu.Item>
+        <Menu.Item key="4" icon={<SettingOutlined />} onClick={onSettingsClick}>
+          Settings
+        </Menu.Item>
+      </Menu>
+    </div>
+  );
+}
