@@ -22,14 +22,14 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-800 text-gray-200">
-      <div className="container px-6 py-8 mx-auto">
+    <footer className="bg-gray-800 text-gray-200 py-8">
+      <div className="container mx-auto px-6">
         <div className="flex flex-col items-center space-y-4 sm:flex-row sm:justify-between sm:space-y-0">
           {/* Logo */}
           <Logo className="text-white" />
 
-          {/* Dynamic Navigation Links */}
-          <div className="flex space-x-6">
+          {/* Navigation Links */}
+          <div className="flex space-x-6 font-medium">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
                 <span className="hover:text-white transition">
@@ -39,7 +39,7 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* Dynamic Social Media Icons */}
+          {/* Social Media Icons */}
           <div className="flex space-x-4">
             {socialLinks.map((link) => (
               <Link
@@ -48,10 +48,9 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.label}
+                className="hover:text-indigo-400 transition"
               >
-                <span className="w-5 h-5 hover:text-indigo-400 transition">
-                  {link.icon}
-                </span>
+                <span className="w-5 h-5">{link.icon}</span>
               </Link>
             ))}
           </div>
@@ -61,7 +60,12 @@ export default function Footer() {
         <div className="mt-6 text-center text-gray-400">
           &copy;{new Date().getFullYear()} Colabier. All rights reserved
           by&nbsp;
-          <Link href="https://nadim.vercel.app">Nadim Chowdhury</Link>.
+          <Link href="https://nadim.vercel.app">
+            <span className="underline hover:text-gray-200">
+              Nadim Chowdhury
+            </span>
+          </Link>
+          .
         </div>
       </div>
     </footer>

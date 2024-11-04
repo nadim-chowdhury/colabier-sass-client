@@ -2,20 +2,29 @@
 
 import { motion } from "framer-motion";
 import { Button, Typography } from "antd";
+import Image from "next/image";
 
 const { Title, Text } = Typography;
 
 export default function HeroSection() {
   return (
-    <section className="relative flex items-center justify-center h-screen mx-4 md:mx-6 rounded-xl overflow-hidden">
+    <section className="relative flex items-center justify-center h-[85vh] mx-4 md:mx-6 rounded-xl overflow-hidden">
       {/* Background Video/Image */}
-      <div className="absolute inset-0 overflow-hidden opacity-30">
-        <video
+      <div className="absolute inset-0 overflow-hidden">
+        {/* <video
           autoPlay
           loop
           muted
           className="object-cover w-full h-full"
           src="https://videos.pexels.com/video-files/3255275/3255275-uhd_2560_1440_25fps.mp4"
+        /> */}
+
+        <Image
+          src="https://images.pexels.com/photos/3184464/pexels-photo-3184464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          alt=""
+          width={1280}
+          height={720}
+          className="object-cover w-full h-full"
         />
       </div>
 

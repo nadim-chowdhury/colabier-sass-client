@@ -12,7 +12,7 @@ import Header from "@/components/Shared/Header";
 
 export default function Home() {
   return (
-    <section className="flex flex-col gap-10">
+    <section>
       <Header />
       <HeroSection />
       <FeaturesSection />
