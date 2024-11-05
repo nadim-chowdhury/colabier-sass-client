@@ -1,5 +1,3 @@
-"use client";
-
 import ComparisonSection from "@/components/Home/ComparisonSection";
 import DemoSection from "@/components/Home/DemoSection";
 import FAQSection from "@/components/Home/FAQSection";
@@ -14,7 +12,7 @@ import Header from "@/components/Shared/Header";
 
 export default function Home() {
   return (
-    <section>
+    <>
       <Header />
       <HeroSection />
       <FeaturesSection />
@@ -26,6 +24,6 @@ export default function Home() {
       <FAQSection />
       <NewsletterSignup />
       <Footer />
-    </section>
+    </>
   );
 }

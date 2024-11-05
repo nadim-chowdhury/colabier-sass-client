@@ -1,8 +1,6 @@
-import { Select, Typography } from "antd";
-import { useState } from "react";
+"use client";
 
-const { Option } = Select;
-const { Text } = Typography;
+import { useState } from "react";
 
 const timeZones = [
   "UTC",
@@ -26,26 +24,26 @@ export default function TimeZoneSelector({
 }: TimeZoneSelectorProps) {
   const [selectedTimeZone, setSelectedTimeZone] = useState("UTC");
 
-  const handleChange = (value: string) => {
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
     setSelectedTimeZone(value);
     onTimeZoneChange(value);
   };
 
   return (
     <div className="p-4 bg-white rounded-lg shadow-md">
-      <Text className="text-lg font-semibold">Select Time Zone</Text>
-      <Select
+      <h2 className="text-lg font-semibold">Select Time Zone</h2>
+      <select
         value={selectedTimeZone}
         onChange={handleChange}
-        className="w-full mt-2"
-        placeholder="Select Time Zone"
+        className="w-full mt-2 p-2 border rounded"
       >
         {timeZones.map((tz) => (
-          <Option key={tz} value={tz}>
+          <option key={tz} value={tz}>
             {tz}
-          </Option>
+          </option>
         ))}
-      </Select>
+      </select>
     </div>
   );
 }

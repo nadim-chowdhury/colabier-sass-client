@@ -6,15 +6,12 @@ import ChatHeader from "@/components/Chat/ChatHeader";
 import MessageInput from "@/components/Chat/MessageInput";
 
 export default function ChatPage() {
-  // Define some mock data or fetch it dynamically
   const channelName = "General";
   const memberCount = 42;
-  const avatarUrl = "/path/to/avatar.jpg"; // Replace with actual avatar URL or logic
+  const avatarUrl = "/path/to/avatar.jpg"; 
 
-  // Define the function to handle sending messages
   const handleSendMessage = (message: string) => {
     console.log("Message sent:", message);
-    // Add logic to send the message to the server or update state
   };
 
   return (

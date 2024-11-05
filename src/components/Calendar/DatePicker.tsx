@@ -1,8 +1,5 @@
 "use client";
 
-import { DatePicker } from "antd";
-import dayjs, { Dayjs } from "dayjs";
-
 interface DatePickerComponentProps {
   selectedDate: Date | null;
   onChange: (date: Date | null) => void;
@@ -12,12 +9,21 @@ export default function DatePickerComponent({
   selectedDate,
   onChange,
 }: DatePickerComponentProps) {
+  const formatDate = (date: Date) => {
+    return date.toISOString().split("T")[0];
+  };
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    onChange(value ? new Date(value) : null);
+  };
+
   return (
-    <DatePicker
-      value={selectedDate ? dayjs(selectedDate) : null}
-      onChange={(date: Dayjs | null) => onChange(date ? date.toDate() : null)}
-      format="YYYY-MM-DD"
-      className="w-full"
+    <input
+      type="date"
+      value={selectedDate ? formatDate(selectedDate) : ""}
+      onChange={handleDateChange}
+      className="w-full p-2 border rounded"
     />
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 const faqs = [
   {
@@ -27,31 +26,23 @@ const faqs = [
 ];
 
 export default function FAQSection() {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const toggleFAQ = (index) => {
+  const toggleFAQ = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
   return (
-    <section className="py-16 bg-gray-50">
+    <div className="py-16 bg-gray-50">
       <div className="container px-8 mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl font-bold text-center text-gray-800 md:text-4xl"
-        >
+        <h2 className="text-3xl font-bold text-center text-gray-800 md:text-4xl">
           Frequently Asked Questions
-        </motion.h2>
+        </h2>
 
         <div className="mt-10 space-y-4">
           {faqs.map((faq, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.6 }}
               className="p-4 bg-white border rounded-lg shadow-md"
             >
               <h3
@@ -64,10 +55,10 @@ export default function FAQSection() {
               {activeIndex === index && (
                 <p className="mt-2 text-gray-600">{faq.answer}</p>
               )}
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 const pricingPlans = [
   {
     title: "Free",
@@ -42,29 +40,18 @@ const pricingPlans = [
 
 export default function PricingSection() {
   return (
-    <section className="py-16 bg-gray-100">
+    <div className="py-16 bg-gray-100">
       <div className="container px-8 mx-auto text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl font-bold text-gray-800 md:text-4xl"
-        >
+        <h2 className="text-3xl font-bold text-gray-800 md:text-4xl">
           Choose Your Plan
-        </motion.h2>
+        </h2>
         <p className="mt-4 text-gray-600">
           Flexible plans for any type of team
         </p>
 
         <div className="grid gap-8 mt-10 md:grid-cols-3">
           {pricingPlans.map((plan, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.6 }}
-              className="p-6 bg-white rounded-lg shadow-md"
-            >
+            <div key={index} className="p-6 bg-white rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-gray-800">
                 {plan.title}
               </h3>
@@ -87,10 +74,10 @@ export default function PricingSection() {
               >
                 {plan.buttonText}
               </a>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

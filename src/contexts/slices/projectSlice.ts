@@ -1,8 +1,18 @@
-// store/slices/projectSlice.js
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { createSlice } from "@reduxjs/toolkit";
+interface Project {
+  id: string;
+  name: string;
+  description: string;
+}
 
-const initialState = {
+interface ProjectState {
+  projects: Project[];
+  loading: boolean;
+  error: string | null;
+}
+
+const initialState: ProjectState = {
   projects: [],
   loading: false,
   error: null,
@@ -16,18 +26,18 @@ const projectSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    fetchProjectsSuccess(state, action) {
+    fetchProjectsSuccess(state, action: PayloadAction<Project[]>) {
       state.projects = action.payload;
       state.loading = false;
     },
-    fetchProjectsFailure(state, action) {
+    fetchProjectsFailure(state, action: PayloadAction<string>) {
       state.loading = false;
       state.error = action.payload;
     },
-    addProject(state, action) {
+    addProject(state, action: PayloadAction<Project>) {
       state.projects.push(action.payload);
     },
-    updateProject(state, action) {
+    updateProject(state, action: PayloadAction<Project>) {
       const index = state.projects.findIndex(
         (project) => project.id === action.payload.id
       );
@@ -35,7 +45,7 @@ const projectSlice = createSlice({
         state.projects[index] = action.payload;
       }
     },
-    deleteProject(state, action) {
+    deleteProject(state, action: PayloadAction<string>) {
       state.projects = state.projects.filter(
         (project) => project.id !== action.payload
       );

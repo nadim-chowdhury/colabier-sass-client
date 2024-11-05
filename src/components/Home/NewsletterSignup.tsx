@@ -1,12 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useState } from "react";
 
 export default function NewsletterSignup() {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle form submission (e.g., send email to API)
     alert(`Subscribed with ${email}`);
@@ -14,26 +13,18 @@ export default function NewsletterSignup() {
   };
 
   return (
-    <section className="py-16 bg-indigo-600 text-white">
+    <div className="py-16 bg-indigo-600 text-white">
       <div className="container px-8 mx-auto text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl font-bold md:text-4xl"
-        >
+        <h2 className="text-3xl font-bold md:text-4xl">
           Stay Updated with Our Newsletter
-        </motion.h2>
+        </h2>
         <p className="mt-4 text-lg text-indigo-200">
           Subscribe to receive the latest news and updates directly in your
           inbox.
         </p>
 
-        <motion.form
+        <form
           onSubmit={handleSubmit}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
           className="mt-8 flex flex-col items-center sm:flex-row sm:justify-center"
         >
           <input
@@ -50,8 +41,8 @@ export default function NewsletterSignup() {
           >
             Subscribe
           </button>
-        </motion.form>
+        </form>
       </div>
-    </section>
+    </div>
   );
 }

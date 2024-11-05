@@ -1,8 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Link from "next/link";
 import { useState } from "react";
+import Link from "next/link";
 
 const demos = [
   {
@@ -37,33 +36,24 @@ const demos = [
       "https://videos.pexels.com/video-files/7579564/7579564-uhd_2732_1440_25fps.mp4",
     link: "/features/design-tool",
   },
-  // Add more demos as needed
 ];
 
 export default function DemoSection() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-16 bg-gray-100 mx-4 md:mx-6 rounded-xl">
+    <div className="py-16 bg-gray-100 mx-4 md:mx-6 rounded-xl">
       <div className="container px-8 mx-auto text-center">
         {/* Section Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl font-bold text-gray-800 md:text-4xl"
-        >
+        <h2 className="text-3xl font-bold text-gray-800 md:text-4xl opacity-100 translate-y-0 transition-all duration-600 ease-in-out">
           Explore Interactive Demos
-        </motion.h2>
+        </h2>
 
         {/* Demo Cards */}
         <div className="grid gap-8 mt-10 md:grid-cols-2 lg:grid-cols-4">
           {demos.map((demo, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.6 }}
               className="relative overflow-hidden rounded-lg cursor-pointer group"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -94,10 +84,10 @@ export default function DemoSection() {
                   Learn More
                 </Link>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

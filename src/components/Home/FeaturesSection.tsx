@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   FaComments,
   FaTasks,
@@ -65,26 +64,18 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="py-16 bg-white rounded-xl">
+    <div className="py-16 bg-white rounded-xl">
       <div className="container px-8 mx-auto text-center">
         {/* Section Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl font-bold text-gray-800 md:text-4xl"
-        >
+        <h2 className="text-3xl font-bold text-gray-800 md:text-4xl">
           Key Features of Our Platform
-        </motion.h2>
+        </h2>
 
         {/* Feature Cards */}
         <div className="grid gap-8 mt-10 md:grid-cols-2 lg:grid-cols-4">
           {features.map((feature, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.6 }}
               className="flex flex-col items-center p-6 bg-gray-100 rounded-lg"
             >
               {/* Feature Icon */}
@@ -97,10 +88,10 @@ export default function FeaturesSection() {
 
               {/* Feature Description */}
               <p className="text-gray-600">{feature.description}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

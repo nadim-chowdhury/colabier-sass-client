@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { FiMenu } from "react-icons/fi";
 import Link from "next/link";
+import { FiMenu } from "react-icons/fi";
 import Logo from "./Logo";
 
 const navLinks = [
@@ -20,7 +20,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white px-4 md:px-6 py-4 w-full">
+    <div className="bg-white px-4 md:px-6 py-4 w-full">
       <div className="flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center transition duration-300">
@@ -74,6 +74,6 @@ export default function Header() {
           </div>
         </div>
       )}
-    </header>
+    </div>
   );
 }

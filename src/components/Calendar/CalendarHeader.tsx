@@ -1,10 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Button, Dropdown, Menu, Typography } from "antd";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-
-const { Title } = Typography;
 
 interface CalendarHeaderProps {
   currentDate: Date;
@@ -17,7 +13,8 @@ export default function CalendarHeader({
   onDateChange,
   onViewChange,
 }: CalendarHeaderProps) {
-  const [view, setView] = useState("month");
+  const [view, setView] = useState<"day" | "week" | "month">("month");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handlePrev = () => {
     const newDate = new Date(currentDate);
@@ -35,29 +32,54 @@ export default function CalendarHeader({
     onDateChange(newDate);
   };
 
-  const handleViewChange = (view: "day" | "week" | "month") => {
-    setView(view);
-    onViewChange(view);
+  const handleViewChange = (newView: "day" | "week" | "month") => {
+    setView(newView);
+    onViewChange(newView);
+    setDropdownOpen(false);
   };
 
   return (
     <div className="flex items-center justify-between p-4 bg-white shadow-md">
-      <Button icon={<LeftOutlined />} onClick={handlePrev} />
-      <Title level={4}>{currentDate.toDateString()}</Title>
-      <Button icon={<RightOutlined />} onClick={handleNext} />
-      <Dropdown
-        overlay={
-          <Menu
-            onClick={(e) => handleViewChange(e.key as "day" | "week" | "month")}
-          >
-            <Menu.Item key="day">Day View</Menu.Item>
-            <Menu.Item key="week">Week View</Menu.Item>
-            <Menu.Item key="month">Month View</Menu.Item>
-          </Menu>
-        }
-      >
-        <Button>{view.charAt(0).toUpperCase() + view.slice(1)} View</Button>
-      </Dropdown>
+      <button onClick={handlePrev} className="p-2 bg-gray-200 rounded">
+        {"<"}
+      </button>
+      <h4>{currentDate.toDateString()}</h4>
+      <button onClick={handleNext} className="p-2 bg-gray-200 rounded">
+        {">"}
+      </button>
+
+      <div className="relative">
+        <button
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+          className="p-2 bg-gray-200 rounded"
+        >
+          {view.charAt(0).toUpperCase() + view.slice(1)} View
+        </button>
+        {dropdownOpen && (
+          <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded shadow-md">
+            <ul>
+              <li
+                onClick={() => handleViewChange("day")}
+                className="p-2 hover:bg-gray-100 cursor-pointer"
+              >
+                Day View
+              </li>
+              <li
+                onClick={() => handleViewChange("week")}
+                className="p-2 hover:bg-gray-100 cursor-pointer"
+              >
+                Week View
+              </li>
+              <li
+                onClick={() => handleViewChange("month")}
+                className="p-2 hover:bg-gray-100 cursor-pointer"
+              >
+                Month View
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

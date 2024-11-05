@@ -1,11 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Button, Typography, Dropdown, MenuProps } from "antd";
 import Calendar, { CalendarProps } from "react-calendar";
 import EventCard from "./EventCard";
-
-const { Title } = Typography;
 
 interface CalendarViewProps {
   events: { date: Date; title: string; id: string }[];
@@ -17,9 +14,13 @@ export default function CalendarView({
   onSelectEvent,
 }: CalendarViewProps) {
   const [view, setView] = useState("month");
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleViewChange = (view: string) => setView(view);
+  const handleViewChange = (newView: string) => {
+    setView(newView);
+    setDropdownOpen(false);
+  };
 
   const renderEvents = (date: Date) => {
     return events
@@ -36,27 +37,49 @@ export default function CalendarView({
   const handleDateChange: CalendarProps["onChange"] = (value) => {
     if (value instanceof Date) {
       setSelectedDate(value);
+    } else if (Array.isArray(value) && value.length > 0) {
+      setSelectedDate(value[0]);
+    } else {
+      setSelectedDate(null);
     }
-  };
-
-  const viewMenuItems: MenuProps["items"] = [
-    { key: "day", label: "Day View" },
-    { key: "week", label: "Week View" },
-    { key: "month", label: "Month View" },
-  ];
-
-  const viewMenu: MenuProps = {
-    items: viewMenuItems,
-    onClick: (e) => handleViewChange(e.key),
   };
 
   return (
     <div className="p-4 bg-white rounded-lg shadow-md">
       <div className="flex justify-between items-center mb-4">
-        <Title level={4}>Calendar</Title>
-        <Dropdown menu={viewMenu}>
-          <Button>View: {view.charAt(0).toUpperCase() + view.slice(1)}</Button>
-        </Dropdown>
+        <h2 className="text-lg font-semibold">Calendar</h2>
+        <div className="relative">
+          <button
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+            className="px-4 py-2 bg-gray-200 rounded"
+          >
+            View: {view.charAt(0).toUpperCase() + view.slice(1)}
+          </button>
+          {dropdownOpen && (
+            <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded shadow-md">
+              <ul>
+                <li
+                  onClick={() => handleViewChange("day")}
+                  className="p-2 hover:bg-gray-100 cursor-pointer"
+                >
+                  Day View
+                </li>
+                <li
+                  onClick={() => handleViewChange("week")}
+                  className="p-2 hover:bg-gray-100 cursor-pointer"
+                >
+                  Week View
+                </li>
+                <li
+                  onClick={() => handleViewChange("month")}
+                  className="p-2 hover:bg-gray-100 cursor-pointer"
+                >
+                  Month View
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
       <Calendar
         onChange={handleDateChange}

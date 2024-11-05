@@ -1,7 +1,3 @@
-import { Button, Typography } from "antd";
-
-const { Text } = Typography;
-
 interface TimeSlotProps {
   time: string;
   isSelected: boolean;
@@ -14,14 +10,14 @@ export default function TimeSlot({
   onSelect,
 }: TimeSlotProps) {
   return (
-    <Button
-      type={isSelected ? "primary" : "default"}
+    <button
       onClick={onSelect}
-      className={`w-full mb-2 ${
-        isSelected ? "bg-cyan-600 hover:bg-cyan-700" : ""
-      }`}
+      className={`w-full mb-2 p-2 border rounded ${
+        isSelected ? "bg-cyan-600 text-white" : "bg-white text-black"
+      } hover:bg-cyan-700`}
+      style={{ transition: "background-color 0.3s" }}
     >
-      <Text>{time}</Text>
-    </Button>
+      <span>{time}</span>
+    </button>
   );
 }

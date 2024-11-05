@@ -22,7 +22,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-800 text-gray-200 py-8">
+    <div className="bg-gray-800 text-gray-200 py-8">
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center space-y-4 sm:flex-row sm:justify-between sm:space-y-0">
           {/* Logo */}
@@ -68,6 +68,6 @@ export default function Footer() {
           .
         </div>
       </div>
-    </footer>
+    </div>
   );
 }

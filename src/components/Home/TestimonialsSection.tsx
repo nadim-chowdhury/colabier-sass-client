@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { FaStar } from "react-icons/fa";
 
 const testimonials = [
@@ -26,26 +25,15 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-16 bg-gray-50">
+    <div className="py-16 bg-gray-50">
       <div className="container px-8 mx-auto text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl font-bold text-gray-800 md:text-4xl"
-        >
+        <h2 className="text-3xl font-bold text-gray-800 md:text-4xl">
           What Our Users Say
-        </motion.h2>
+        </h2>
 
         <div className="grid gap-8 mt-10 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.6 }}
-              className="p-6 bg-white rounded-lg shadow-md"
-            >
+            <div key={index} className="p-6 bg-white rounded-lg shadow-md">
               <p className="mb-4 text-gray-700">
                 &quot;{testimonial.review}&quot;
               </p>
@@ -57,10 +45,10 @@ export default function TestimonialsSection() {
               <p className="mt-2 text-gray-800 font-semibold">
                 {testimonial.name}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

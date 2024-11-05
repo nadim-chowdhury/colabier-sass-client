@@ -1,5 +1,3 @@
-// store/index.js
-
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./slices/userSlice";
 import projectSlice from "./slices/projectSlice";

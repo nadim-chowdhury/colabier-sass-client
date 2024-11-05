@@ -14,10 +14,8 @@ interface Event {
 }
 
 export default function CalendarPage() {
-  // State to manage the current date
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  // Dummy events data
   const [events, setEvents] = useState<Event[]>([
     {
       id: "1",
@@ -27,16 +25,14 @@ export default function CalendarPage() {
     },
   ]);
 
-  // Function to handle saving a new event without 'id' and add it to the events list
   const handleSaveEvent = (event: Omit<Event, "id">) => {
-    const newEvent = { ...event, id: String(events.length + 1) }; // Generate a unique id
+    const newEvent = { ...event, id: String(events.length + 1) };
     setEvents([...events, newEvent]);
   };
 
-  // Handlers for header and sidebar actions
   const handleDateChange = (date: Date) => setCurrentDate(date);
-  const handleFilterChange = () => {}; // Implement filter logic as needed
-  const handleSettingsClick = () => {}; // Implement settings logic as needed
+  const handleFilterChange = () => {};
+  const handleSettingsClick = () => {};
 
   return (
     <div className="flex h-screen">

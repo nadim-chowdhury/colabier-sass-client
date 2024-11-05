@@ -6,7 +6,6 @@ import Board from "@/components/TaskManager/Board";
 import TaskFilter from "@/components/TaskManager/TaskFilter";
 import { Column } from "@/types/types";
 
-// Define types if not imported
 type Project = {
   id: string;
   name: string;
@@ -17,7 +16,6 @@ type Filter = {
   priority?: string;
 };
 
-// Placeholder data and functions with updated types
 const projects: Project[] = [
   { id: "1", name: "Project A" },
   { id: "2", name: "Project B" },

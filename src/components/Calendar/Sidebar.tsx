@@ -1,14 +1,7 @@
 "use client";
 
-import { Menu, Typography, DatePicker } from "antd";
-import {
-  FilterOutlined,
-  SettingOutlined,
-  CalendarOutlined,
-} from "@ant-design/icons";
-import { Dayjs } from "dayjs";
-
-const { Text } = Typography;
+import { useState } from "react";
+import { FaCalendarAlt, FaCog } from "react-icons/fa";
 
 interface SidebarProps {
   onFilterChange: (filter: { dateRange?: [Date, Date]; type?: string }) => void;
@@ -19,9 +12,12 @@ export default function Sidebar({
   onFilterChange,
   onSettingsClick,
 }: SidebarProps) {
-  const handleDateChange = (dates: [Dayjs | null, Dayjs | null] | null) => {
-    if (dates && dates[0] && dates[1]) {
-      const range: [Date, Date] = [dates[0].toDate(), dates[1].toDate()];
+  const [startDate, setStartDate] = useState<string>("");
+  const [endDate, setEndDate] = useState<string>("");
+
+  const handleDateChange = () => {
+    if (startDate && endDate) {
+      const range: [Date, Date] = [new Date(startDate), new Date(endDate)];
       onFilterChange({ dateRange: range });
     } else {
       onFilterChange({ dateRange: undefined });
@@ -30,33 +26,50 @@ export default function Sidebar({
 
   return (
     <div className="p-4 bg-gray-100 h-full">
-      <Text className="text-lg font-semibold mb-4">Calendar Filters</Text>
-      <Menu
-        mode="inline"
-        defaultSelectedKeys={["1"]}
-        className="bg-transparent"
-      >
-        <Menu.Item key="1" icon={<CalendarOutlined />}>
-          <DatePicker.RangePicker onChange={handleDateChange} />
-        </Menu.Item>
-        <Menu.Item
-          key="2"
-          icon={<FilterOutlined />}
+      <h2 className="text-lg font-semibold mb-4">Calendar Filters</h2>
+      <div className="mb-4">
+        <label className="block mb-1">Date Range</label>
+        <div className="flex space-x-2">
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => {
+              setStartDate(e.target.value);
+              handleDateChange();
+            }}
+            className="border rounded p-2"
+          />
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => {
+              setEndDate(e.target.value);
+              handleDateChange();
+            }}
+            className="border rounded p-2"
+          />
+        </div>
+      </div>
+      <div className="space-y-2">
+        <button
           onClick={() => onFilterChange({ type: "Meeting" })}
+          className="flex items-center w-full p-2 border rounded hover:bg-gray-200"
         >
-          Meetings
-        </Menu.Item>
-        <Menu.Item
-          key="3"
-          icon={<FilterOutlined />}
+          <FaCalendarAlt className="mr-2" /> Meetings
+        </button>
+        <button
           onClick={() => onFilterChange({ type: "Appointment" })}
+          className="flex items-center w-full p-2 border rounded hover:bg-gray-200"
         >
-          Appointments
-        </Menu.Item>
-        <Menu.Item key="4" icon={<SettingOutlined />} onClick={onSettingsClick}>
-          Settings
-        </Menu.Item>
-      </Menu>
+          <FaCalendarAlt className="mr-2" /> Appointments
+        </button>
+        <button
+          onClick={onSettingsClick}
+          className="flex items-center w-full p-2 border rounded hover:bg-gray-200"
+        >
+          <FaCog className="mr-2" /> Settings
+        </button>
+      </div>
     </div>
   );
 }

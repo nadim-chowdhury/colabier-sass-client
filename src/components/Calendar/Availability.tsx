@@ -1,22 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { Checkbox, TimePicker, Typography, Button } from "antd";
-import { Dayjs } from "dayjs";
-
-const { Text } = Typography;
 
 interface DayAvailability {
   day: string;
-  startTime: Dayjs | null;
-  endTime: Dayjs | null;
+  startTime: string | null;
+  endTime: string | null;
   available: boolean;
 }
 
 const initialAvailability: DayAvailability[] = [
   { day: "Monday", startTime: null, endTime: null, available: false },
   { day: "Tuesday", startTime: null, endTime: null, available: false },
-  // Repeat for all days
 ];
 
 export default function Availability() {
@@ -32,7 +27,7 @@ export default function Availability() {
   const handleTimeChange = (
     index: number,
     field: "startTime" | "endTime",
-    time: Dayjs | null
+    time: string
   ) => {
     const updatedAvailability = [...availability];
     updatedAvailability[index][field] = time;
@@ -41,32 +36,38 @@ export default function Availability() {
 
   return (
     <div className="p-4 bg-white rounded-lg shadow-md">
-      <Text className="text-lg font-semibold">Set Your Availability</Text>
+      <h2 className="text-lg font-semibold mb-4">Set Your Availability</h2>
       {availability.map((day, index) => (
         <div key={day.day} className="flex items-center space-x-4 mt-4">
-          <Checkbox
-            checked={day.available}
-            onChange={() => handleToggleDay(index)}
-          >
-            {day.day}
-          </Checkbox>
-          <TimePicker
-            value={day.startTime}
-            onChange={(time) => handleTimeChange(index, "startTime", time)}
+          <label className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              checked={day.available}
+              onChange={() => handleToggleDay(index)}
+            />
+            <span>{day.day}</span>
+          </label>
+          <input
+            type="time"
+            value={day.startTime || ""}
+            onChange={(e) =>
+              handleTimeChange(index, "startTime", e.target.value)
+            }
             disabled={!day.available}
-            format="HH:mm"
+            className="p-2 border rounded"
           />
-          <TimePicker
-            value={day.endTime}
-            onChange={(time) => handleTimeChange(index, "endTime", time)}
+          <input
+            type="time"
+            value={day.endTime || ""}
+            onChange={(e) => handleTimeChange(index, "endTime", e.target.value)}
             disabled={!day.available}
-            format="HH:mm"
+            className="p-2 border rounded"
           />
         </div>
       ))}
-      <Button type="primary" className="mt-4">
+      <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
         Save Availability
-      </Button>
+      </button>
     </div>
   );
 }
