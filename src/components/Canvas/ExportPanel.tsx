@@ -1,8 +1,5 @@
-import { Button, Typography } from "antd";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-
-const { Text } = Typography;
 
 interface ExportPanelProps {
   canvasRef: React.RefObject<HTMLDivElement>;
@@ -33,10 +30,20 @@ export default function ExportPanel({ canvasRef }: ExportPanelProps) {
 
   return (
     <div className="p-4 bg-white rounded-lg shadow-md">
-      <Text className="text-lg font-semibold">Export Options</Text>
+      <p className="text-lg font-semibold">Export Options</p>
       <div className="mt-4 flex space-x-2">
-        <Button onClick={exportAsImage}>Export as PNG</Button>
-        <Button onClick={exportAsPDF}>Export as PDF</Button>
+        <button
+          onClick={exportAsImage}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none"
+        >
+          Export as PNG
+        </button>
+        <button
+          onClick={exportAsPDF}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none"
+        >
+          Export as PDF
+        </button>
       </div>
     </div>
   );

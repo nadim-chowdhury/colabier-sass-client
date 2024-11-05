@@ -1,12 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Input, Button } from "antd";
-import {
-  SendOutlined,
-  SmileOutlined,
-  PaperClipOutlined,
-} from "@ant-design/icons";
+import { FaPaperPlane, FaSmile, FaPaperclip } from "react-icons/fa";
 
 export default function MessageInput({
   onSendMessage,
@@ -24,31 +19,35 @@ export default function MessageInput({
 
   return (
     <div className="flex items-center p-4 border-t border-gray-200">
-      <Button
+      <button
+        onClick={() => console.log("Emoji picker opened")}
+        className="mr-2 text-gray-600 hover:text-cyan-600 p-2 focus:outline-none"
+        title="Emoji"
+      >
+        <FaSmile size={20} />
+      </button>
+      <button
+        onClick={() => console.log("Attachment opened")}
+        className="mr-2 text-gray-600 hover:text-cyan-600 p-2 focus:outline-none"
+        title="Attach file"
+      >
+        <FaPaperclip size={20} />
+      </button>
+      <input
         type="text"
-        icon={<SmileOutlined />}
-        className="mr-2 text-gray-600 hover:text-cyan-600"
-      />
-      <Button
-        type="text"
-        icon={<PaperClipOutlined />}
-        className="mr-2 text-gray-600 hover:text-cyan-600"
-      />
-      <Input
         placeholder="Type a message..."
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        onPressEnter={handleSendMessage}
-        className="flex-grow"
+        onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+        className="flex-grow p-2 border rounded-lg outline-none"
       />
-      <Button
-        type="primary"
-        icon={<SendOutlined />}
+      <button
         onClick={handleSendMessage}
-        className="ml-2 bg-cyan-600 hover:bg-cyan-700"
+        className="ml-2 bg-cyan-600 text-white p-2 rounded-lg hover:bg-cyan-700 focus:outline-none flex items-center justify-center"
+        title="Send message"
       >
-        Send
-      </Button>
+        <FaPaperPlane size={20} />
+      </button>
     </div>
   );
 }

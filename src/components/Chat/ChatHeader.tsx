@@ -1,13 +1,7 @@
 "use client";
 
-import { Avatar, Typography, Button, Tooltip } from "antd";
-import {
-  PhoneOutlined,
-  VideoCameraOutlined,
-  MoreOutlined,
-} from "@ant-design/icons";
-
-const { Text } = Typography;
+import Image from "next/image";
+import { FaPhone, FaVideo, FaEllipsisH } from "react-icons/fa"; // Import icons from react-icons
 
 interface ChatHeaderProps {
   channelName: string;
@@ -24,33 +18,39 @@ export default function ChatHeader({
     <div className="flex items-center justify-between p-4 bg-white shadow-md rounded-t-lg">
       {/* Channel Info */}
       <div className="flex items-center space-x-3">
-        <Avatar src={avatarUrl || "/default-avatar.png"} />
+        <Image
+          src={avatarUrl || "/default-avatar.png"}
+          alt="Avatar"
+          width={360}
+          height={360}
+          className="w-10 h-10 rounded-full"
+        />
         <div>
-          <Text className="font-semibold text-gray-800">{channelName}</Text>
-          <Text className="text-xs text-gray-500">{memberCount} members</Text>
+          <p className="font-semibold text-gray-800">{channelName}</p>
+          <p className="text-xs text-gray-500">{memberCount} members</p>
         </div>
       </div>
 
       {/* Action Buttons */}
       <div className="flex space-x-2">
-        <Tooltip title="Voice Call">
-          <Button
-            icon={<PhoneOutlined />}
-            className="text-gray-700 hover:text-cyan-600"
-          />
-        </Tooltip>
-        <Tooltip title="Video Call">
-          <Button
-            icon={<VideoCameraOutlined />}
-            className="text-gray-700 hover:text-cyan-600"
-          />
-        </Tooltip>
-        <Tooltip title="More Options">
-          <Button
-            icon={<MoreOutlined />}
-            className="text-gray-700 hover:text-cyan-600"
-          />
-        </Tooltip>
+        <button
+          title="Voice Call"
+          className="p-2 rounded-full text-gray-700 hover:text-cyan-600"
+        >
+          <FaPhone size={18} />
+        </button>
+        <button
+          title="Video Call"
+          className="p-2 rounded-full text-gray-700 hover:text-cyan-600"
+        >
+          <FaVideo size={18} />
+        </button>
+        <button
+          title="More Options"
+          className="p-2 rounded-full text-gray-700 hover:text-cyan-600"
+        >
+          <FaEllipsisH size={18} />
+        </button>
       </div>
     </div>
   );

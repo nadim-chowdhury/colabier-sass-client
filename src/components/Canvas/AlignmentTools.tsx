@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Tooltip, Typography } from "antd";
 import {
   AlignLeftOutlined,

@@ -1,10 +1,4 @@
-import { Button, Tooltip } from "antd";
-import {
-  DeleteOutlined,
-  CopyOutlined,
-  ArrowUpOutlined,
-  ArrowDownOutlined,
-} from "@ant-design/icons";
+import { FaTrash, FaCopy, FaArrowUp, FaArrowDown } from "react-icons/fa";
 
 interface ElementToolbarProps {
   onDelete: () => void;
@@ -21,18 +15,34 @@ export default function ElementToolbar({
 }: ElementToolbarProps) {
   return (
     <div className="flex space-x-2 bg-gray-200 p-2 rounded-md shadow-md absolute top-0 left-0">
-      <Tooltip title="Delete">
-        <Button icon={<DeleteOutlined />} onClick={onDelete} />
-      </Tooltip>
-      <Tooltip title="Duplicate">
-        <Button icon={<CopyOutlined />} onClick={onDuplicate} />
-      </Tooltip>
-      <Tooltip title="Move Up">
-        <Button icon={<ArrowUpOutlined />} onClick={onMoveUp} />
-      </Tooltip>
-      <Tooltip title="Move Down">
-        <Button icon={<ArrowDownOutlined />} onClick={onMoveDown} />
-      </Tooltip>
+      <button
+        onClick={onDelete}
+        title="Delete"
+        className="p-2 hover:bg-gray-300 rounded"
+      >
+        <FaTrash />
+      </button>
+      <button
+        onClick={onDuplicate}
+        title="Duplicate"
+        className="p-2 hover:bg-gray-300 rounded"
+      >
+        <FaCopy />
+      </button>
+      <button
+        onClick={onMoveUp}
+        title="Move Up"
+        className="p-2 hover:bg-gray-300 rounded"
+      >
+        <FaArrowUp />
+      </button>
+      <button
+        onClick={onMoveDown}
+        title="Move Down"
+        className="p-2 hover:bg-gray-300 rounded"
+      >
+        <FaArrowDown />
+      </button>
     </div>
   );
 }

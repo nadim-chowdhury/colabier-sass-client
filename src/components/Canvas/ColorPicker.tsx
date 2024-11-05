@@ -1,5 +1,6 @@
+"use client";
+
 import { useState } from "react";
-import { Popover, Button } from "antd";
 import { SketchPicker, ColorResult } from "react-color";
 
 interface ColorPickerProps {
@@ -14,16 +15,28 @@ export default function ColorPicker({ color, onChange }: ColorPickerProps) {
     onChange(colorResult.hex);
   };
 
+  const toggleVisibility = () => {
+    setVisible(!visible);
+  };
+
   return (
-    <Popover
-      content={<SketchPicker color={color} onChange={handleChange} />}
-      trigger="click"
-      visible={visible}
-      onVisibleChange={(vis) => setVisible(vis)}
-    >
-      <Button style={{ backgroundColor: color }} className="w-full">
+    <div className="relative inline-block">
+      <button
+        style={{ backgroundColor: color }}
+        onClick={toggleVisibility}
+        onBlur={() => setVisible(false)}
+        className="w-full p-2 rounded text-white"
+      >
         {color}
-      </Button>
-    </Popover>
+      </button>
+      {visible && (
+        <div
+          className="absolute top-full mt-2 z-10"
+          onMouseDown={(e) => e.preventDefault()} // Prevents onBlur from triggering immediately
+        >
+          <SketchPicker color={color} onChange={handleChange} />
+        </div>
+      )}
+    </div>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { List, Avatar, Typography } from "antd";
 
 const { Text } = Typography;

@@ -1,3 +1,5 @@
+"use client";
+
 import { Avatar, Select, Typography } from "antd";
 
 const { Option } = Select;

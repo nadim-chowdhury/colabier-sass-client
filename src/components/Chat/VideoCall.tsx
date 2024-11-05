@@ -1,16 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Button, Typography } from "antd";
 import {
-  AudioMutedOutlined,
-  AudioOutlined,
-  VideoCameraOutlined,
-  PhoneOutlined,
-} from "@ant-design/icons";
+  FaMicrophone,
+  FaMicrophoneSlash,
+  FaVideo,
+  FaPhone,
+} from "react-icons/fa";
 import Image from "next/image";
-
-const { Text } = Typography;
 
 interface VideoCallParticipant {
   id: number;
@@ -38,9 +35,7 @@ export default function VideoCall() {
 
   return (
     <div className="p-4 bg-white rounded-lg shadow-md">
-      <Text className="text-lg font-semibold text-gray-800 mb-4">
-        Video Call
-      </Text>
+      <p className="text-lg font-semibold text-gray-800 mb-4">Video Call</p>
 
       {/* Video Grid */}
       <div className="grid grid-cols-2 gap-4 mb-4">
@@ -53,11 +48,12 @@ export default function VideoCall() {
               src={participant.videoSrc}
               alt={`${participant.name}'s video`}
               className="w-full h-full object-cover"
+              layout="fill"
             />
-            <div className="absolute bottom-0 left-0 p-2 bg-gray-800 bg-opacity-75 w-full">
-              <Text className="text-white">{participant.name}</Text>
+            <div className="absolute bottom-0 left-0 p-2 bg-gray-800 bg-opacity-75 w-full flex items-center">
+              <p className="text-white">{participant.name}</p>
               {participant.isMuted && (
-                <AudioMutedOutlined className="text-red-500 ml-2" />
+                <FaMicrophoneSlash className="text-red-500 ml-2" />
               )}
             </div>
           </div>
@@ -66,28 +62,25 @@ export default function VideoCall() {
 
       {/* Controls */}
       <div className="flex justify-center space-x-4">
-        <Button
-          type="primary"
-          icon={isMuted ? <AudioMutedOutlined /> : <AudioOutlined />}
+        <button
           onClick={toggleMute}
-          className="bg-cyan-600 hover:bg-cyan-700"
+          className="flex items-center bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 focus:outline-none"
         >
+          {isMuted ? (
+            <FaMicrophoneSlash className="mr-2" />
+          ) : (
+            <FaMicrophone className="mr-2" />
+          )}
           {isMuted ? "Unmute" : "Mute"}
-        </Button>
-        <Button
-          type="primary"
-          icon={<VideoCameraOutlined />}
-          className="bg-cyan-600 hover:bg-cyan-700"
-        >
+        </button>
+        <button className="flex items-center bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 focus:outline-none">
+          <FaVideo className="mr-2" />
           Video
-        </Button>
-        <Button
-          // type="danger"
-          icon={<PhoneOutlined />}
-          className="bg-red-600 hover:bg-red-700"
-        >
+        </button>
+        <button className="flex items-center bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 focus:outline-none">
+          <FaPhone className="mr-2" />
           End Call
-        </Button>
+        </button>
       </div>
     </div>
   );

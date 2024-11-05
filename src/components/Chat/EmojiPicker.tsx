@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import { Popover, Button } from "antd";
-import { SmileOutlined } from "@ant-design/icons";
 import dynamic from "next/dynamic";
+import { FaSmile } from "react-icons/fa";
 import "emoji-mart/css/emoji-mart.css"; // Import EmojiMart styles
 
 // Define a custom type for emojis
@@ -36,20 +35,21 @@ export default function EmojiPicker({ onSelectEmoji }: EmojiPickerProps) {
   };
 
   return (
-    <Popover
-      content={
-        <Suspense fallback={<div>Loading...</div>}>
-          <Picker onSelect={handleSelect} />
-        </Suspense>
-      }
-      trigger="click"
-      open={open}
-      onOpenChange={(v) => setOpen(v)}
-    >
-      <Button
-        icon={<SmileOutlined />}
-        className="text-gray-600 hover:text-cyan-600"
-      />
-    </Popover>
+    <div className="relative inline-block">
+      <button
+        onClick={() => setOpen(!open)}
+        className="text-gray-600 hover:text-cyan-600 p-2 focus:outline-none"
+      >
+        <FaSmile size={20} />
+      </button>
+
+      {open && (
+        <div className="absolute z-10 mt-2 p-2 bg-white shadow-lg rounded">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Picker onSelect={handleSelect} />
+          </Suspense>
+        </div>
+      )}
+    </div>
   );
 }

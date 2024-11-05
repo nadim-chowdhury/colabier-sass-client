@@ -1,10 +1,7 @@
 "use client";
 
-import { List, Typography } from "antd";
 import MessageInput from "./MessageInput";
 import MessageItem from "./MessageItem";
-
-const { Title } = Typography;
 
 interface Message {
   id: number;
@@ -40,9 +37,7 @@ export default function ThreadView({ mainMessage }: { mainMessage: Message }) {
 
   return (
     <div className="flex flex-col h-full bg-white rounded-lg shadow-md p-4">
-      <Title level={5} className="text-cyan-700">
-        Thread
-      </Title>
+      <h5 className="text-cyan-700 font-semibold mb-4">Thread</h5>
 
       {/* Main Message */}
       <div className="mb-4">
@@ -57,19 +52,19 @@ export default function ThreadView({ mainMessage }: { mainMessage: Message }) {
 
       {/* Replies */}
       <div className="flex-grow overflow-y-auto mb-4">
-        <List
-          dataSource={replies}
-          renderItem={(reply) => (
-            <MessageItem
-              key={reply.id}
-              user={reply.user}
-              avatar={reply.avatar}
-              text={reply.text}
-              timestamp={reply.timestamp}
-              isOwnMessage={reply.isOwnMessage}
-            />
-          )}
-        />
+        <ul className="space-y-4">
+          {replies.map((reply) => (
+            <li key={reply.id}>
+              <MessageItem
+                user={reply.user}
+                avatar={reply.avatar}
+                text={reply.text}
+                timestamp={reply.timestamp}
+                isOwnMessage={reply.isOwnMessage}
+              />
+            </li>
+          ))}
+        </ul>
       </div>
 
       {/* Reply Input */}

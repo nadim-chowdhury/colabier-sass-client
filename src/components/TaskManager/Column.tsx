@@ -1,17 +1,14 @@
+"use client";
+
 import { Typography, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import TaskList from "./TaskList";
+import { Column as ColumnType } from "@/types/types"; // Import the shared types
 
 const { Title } = Typography;
 
-interface Column {
-  id: string;
-  title: string;
-  tasks: Task[];
-}
-
 interface ColumnProps {
-  column: Column;
+  column: ColumnType;
   onAddTask: (columnId: string) => void;
   onMoveTask: (taskId: string, newColumnId: string) => void;
   onOpenTask: (taskId: string) => void;

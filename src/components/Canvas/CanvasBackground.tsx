@@ -1,11 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { Button, Upload, Typography } from "antd";
+import { useState, ChangeEvent } from "react";
+import { FaUpload } from "react-icons/fa";
 import ColorPicker from "./ColorPicker";
-import { UploadOutlined } from "@ant-design/icons";
-
-const { Text } = Typography;
 
 interface CanvasBackgroundProps {
   onBackgroundChange: (background: { color?: string; image?: string }) => void;
@@ -21,33 +18,35 @@ export default function CanvasBackground({
     onBackgroundChange({ color });
   };
 
-  const handleImageUpload = (info: any) => {
-    if (info.file.status === "done") {
-      const imageUrl = URL.createObjectURL(info.file.originFileObj);
+  const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
       onBackgroundChange({ image: imageUrl });
     }
   };
 
   return (
     <div className="p-4 bg-white rounded-lg shadow-md">
-      <Text className="text-lg font-semibold">Canvas Background</Text>
+      <p className="text-lg font-semibold">Canvas Background</p>
 
       <div className="mt-4">
-        <Text>Background Color</Text>
+        <p>Background Color</p>
         <ColorPicker color={backgroundColor} onChange={handleColorChange} />
       </div>
 
       <div className="mt-4">
-        <Text>Background Image</Text>
-        <Upload
-          customRequest={({ file, onSuccess }) => {
-            setTimeout(() => onSuccess && onSuccess("ok"), 0);
-          }}
-          onChange={handleImageUpload}
-          showUploadList={false}
-        >
-          <Button icon={<UploadOutlined />}>Upload Image</Button>
-        </Upload>
+        <p>Background Image</p>
+        <label className="flex items-center space-x-2 cursor-pointer">
+          <FaUpload />
+          <span>Upload Image</span>
+          <input
+            type="file"
+            onChange={handleImageUpload}
+            className="hidden"
+            accept="image/*"
+          />
+        </label>
       </div>
     </div>
   );

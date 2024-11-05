@@ -1,16 +1,36 @@
+"use client";
+
 import { useState } from "react";
-import { Typography, Input } from "antd";
 import Image from "next/image";
 
-const { Text } = Typography;
+interface TextProperties {
+  x: number;
+  y: number;
+  color: string;
+  content: string;
+}
+
+interface ShapeProperties {
+  x: number;
+  y: number;
+  color: string;
+}
+
+interface ImageProperties {
+  x: number;
+  y: number;
+  src: string;
+}
+
+type Properties = TextProperties | ShapeProperties | ImageProperties;
 
 interface CanvasElementProps {
   element: {
     id: string;
     type: "text" | "shape" | "image";
-    properties: any;
+    properties: Properties;
   };
-  onUpdate: (newProperties: any) => void;
+  onUpdate: (newProperties: Partial<Properties>) => void;
 }
 
 export default function CanvasElement({
@@ -35,30 +55,38 @@ export default function CanvasElement({
         top: properties.y,
         left: properties.x,
         cursor: "pointer",
-        color: properties.color,
+        color:
+          type === "text" ? (properties as TextProperties).color : undefined,
       }}
       onDoubleClick={handleDoubleClick}
     >
       {type === "text" &&
         (editing ? (
-          <Input
-            value={properties.content}
+          <input
+            type="text"
+            value={(properties as TextProperties).content}
             onChange={handleTextChange}
             onBlur={() => setEditing(false)}
+            className="border p-1 rounded"
           />
         ) : (
-          <Text>{properties.content}</Text>
+          <span>{(properties as TextProperties).content}</span>
         ))}
       {type === "shape" && (
         <div
-          style={{ width: 100, height: 100, backgroundColor: properties.color }}
+          style={{
+            width: 100,
+            height: 100,
+            backgroundColor: (properties as ShapeProperties).color,
+          }}
         />
       )}
       {type === "image" && (
         <Image
-          src={properties.src}
+          src={(properties as ImageProperties).src}
           alt="Canvas element"
-          style={{ width: 100, height: 100 }}
+          width={100}
+          height={100}
         />
       )}
     </div>

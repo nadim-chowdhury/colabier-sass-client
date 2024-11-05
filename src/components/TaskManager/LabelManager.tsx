@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { List, Input, Button, Tag, Typography } from "antd";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";

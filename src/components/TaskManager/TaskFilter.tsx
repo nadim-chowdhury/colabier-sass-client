@@ -1,4 +1,7 @@
-import { Form, Select, Checkbox, Typography } from "antd";
+"use client";
+
+import { useState } from "react";
+import { Form, Select, Typography } from "antd";
 
 const { Text } = Typography;
 const { Option } = Select;
@@ -14,8 +17,19 @@ interface TaskFilterProps {
 }
 
 export default function TaskFilter({ onFilterChange }: TaskFilterProps) {
-  const handleFilterChange = (field: string, value: any) => {
-    onFilterChange({ ...filters, [field]: value });
+  const [filters, setFilters] = useState<Filters>({
+    labels: [],
+    priority: "",
+    assignees: [],
+  });
+
+  const handleFilterChange = (
+    field: keyof Filters,
+    value: string[] | string // Specify types based on possible field values
+  ) => {
+    const newFilters = { ...filters, [field]: value };
+    setFilters(newFilters);
+    onFilterChange(newFilters);
   };
 
   return (
@@ -27,7 +41,7 @@ export default function TaskFilter({ onFilterChange }: TaskFilterProps) {
         <Select
           mode="multiple"
           placeholder="Select labels"
-          onChange={(value) => handleFilterChange("labels", value)}
+          onChange={(value: string[]) => handleFilterChange("labels", value)}
         >
           <Option value="Urgent">Urgent</Option>
           <Option value="Bug">Bug</Option>
@@ -39,7 +53,7 @@ export default function TaskFilter({ onFilterChange }: TaskFilterProps) {
       <Form.Item label="Priority">
         <Select
           placeholder="Select priority"
-          onChange={(value) => handleFilterChange("priority", value)}
+          onChange={(value: string) => handleFilterChange("priority", value)}
         >
           <Option value="High">High</Option>
           <Option value="Medium">Medium</Option>
@@ -52,7 +66,7 @@ export default function TaskFilter({ onFilterChange }: TaskFilterProps) {
         <Select
           mode="multiple"
           placeholder="Select assignees"
-          onChange={(value) => handleFilterChange("assignees", value)}
+          onChange={(value: string[]) => handleFilterChange("assignees", value)}
         >
           <Option value="Alice">Alice</Option>
           <Option value="Bob">Bob</Option>

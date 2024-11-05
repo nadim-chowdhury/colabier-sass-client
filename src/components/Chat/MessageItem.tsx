@@ -1,8 +1,6 @@
 "use client";
 
-import { Avatar, Typography } from "antd";
-
-const { Text } = Typography;
+import Image from "next/image";
 
 interface MessageItemProps {
   user: string;
@@ -23,23 +21,39 @@ export default function MessageItem({
     <div
       className={`flex items-start ${isOwnMessage ? "justify-end" : ""} mb-4`}
     >
-      {!isOwnMessage && <Avatar src={avatar} className="mr-3" />}
+      {!isOwnMessage && (
+        <Image
+          src={avatar}
+          alt={`${user}'s avatar`}
+          width={360}
+          height={360}
+          className="w-8 h-8 rounded-full mr-3"
+        />
+      )}
       <div
         className={`flex flex-col ${
           isOwnMessage ? "items-end" : "items-start"
         }`}
       >
-        <Text className="font-semibold text-gray-800">{user}</Text>
+        <p className="font-semibold text-gray-800">{user}</p>
         <div
-          className={`bg-gray-100 p-2 rounded-lg ${
+          className={`p-2 rounded-lg ${
             isOwnMessage ? "bg-cyan-100" : "bg-gray-100"
           }`}
         >
-          <Text>{text}</Text>
+          <p>{text}</p>
         </div>
-        <Text className="text-xs text-gray-500 mt-1">{timestamp}</Text>
+        <p className="text-xs text-gray-500 mt-1">{timestamp}</p>
       </div>
-      {isOwnMessage && <Avatar src={avatar} className="ml-3" />}
+      {isOwnMessage && (
+        <Image
+          src={avatar}
+          alt={`${user}'s avatar`}
+          width={360}
+          height={360}
+          className="w-8 h-8 rounded-full ml-3"
+        />
+      )}
     </div>
   );
 }

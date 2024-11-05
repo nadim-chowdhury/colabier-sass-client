@@ -1,3 +1,4 @@
+// TaskList.tsx
 import { List } from "antd";
 import TaskCard from "./TaskCard";
 
@@ -10,7 +11,7 @@ interface Task {
 
 interface TaskListProps {
   tasks: Task[];
-  onMoveTask: (taskId: string, newColumnId: string) => void;
+  onMoveTask: (taskId: string, newColumnId: string) => void; // Add this line
   onOpenTask: (taskId: string) => void;
 }
 
@@ -19,6 +20,8 @@ export default function TaskList({
   onMoveTask,
   onOpenTask,
 }: TaskListProps) {
+  console.log("onMoveTask:", onMoveTask);
+  
   return (
     <List
       dataSource={tasks}

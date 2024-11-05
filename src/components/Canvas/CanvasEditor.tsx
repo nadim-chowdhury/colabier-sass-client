@@ -1,14 +1,20 @@
+"use client";
+
 import { useState } from "react";
 import ToolPanel from "./ToolPanel";
 import CanvasElement from "./CanvasElement";
-import { Typography } from "antd";
 
-const { Title } = Typography;
+interface ElementProperties {
+  x: number;
+  y: number;
+  content: string;
+  color: string;
+}
 
 interface Element {
   id: string;
   type: "text" | "shape" | "image";
-  properties: any;
+  properties: ElementProperties;
 }
 
 export default function CanvasEditor() {
@@ -23,7 +29,10 @@ export default function CanvasEditor() {
     setElements([...elements, newElement]);
   };
 
-  const updateElement = (id: string, newProperties: any) => {
+  const updateElement = (
+    id: string,
+    newProperties: Partial<ElementProperties>
+  ) => {
     setElements(
       elements.map((el) =>
         el.id === id
@@ -37,7 +46,7 @@ export default function CanvasEditor() {
     <div className="flex">
       <ToolPanel onAddElement={addElement} />
       <div className="relative bg-gray-100 w-full h-screen border border-gray-300 rounded-lg p-4">
-        <Title level={3}>Canvas Editor</Title>
+        <h3 className="text-xl font-semibold">Canvas Editor</h3>
         {elements.map((element) => (
           <CanvasElement
             key={element.id}

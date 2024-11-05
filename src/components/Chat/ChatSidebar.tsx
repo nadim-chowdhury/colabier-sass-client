@@ -1,57 +1,55 @@
 "use client";
 
-import { Avatar, Typography, List, Divider } from "antd";
-import { MessageOutlined } from "@ant-design/icons";
-
-const { Text } = Typography;
-
-const channels = [
-  { id: 1, name: "General", icon: <MessageOutlined /> },
-  { id: 2, name: "Development", icon: <MessageOutlined /> },
-  { id: 3, name: "Design", icon: <MessageOutlined /> },
-];
-
-const directMessages = [
-  { id: 1, name: "Alice", avatar: "/avatar1.png" },
-  { id: 2, name: "Bob", avatar: "/avatar2.png" },
-  { id: 3, name: "Charlie", avatar: "/avatar3.png" },
-];
+import { FaComments } from "react-icons/fa";
+import Image from "next/image";
 
 export default function ChatSidebar() {
+  const channels = [
+    { id: 1, name: "General", icon: <FaComments /> },
+    { id: 2, name: "Development", icon: <FaComments /> },
+    { id: 3, name: "Design", icon: <FaComments /> },
+  ];
+
+  const directMessages = [
+    { id: 1, name: "Alice", avatar: "/avatar1.png" },
+    { id: 2, name: "Bob", avatar: "/avatar2.png" },
+    { id: 3, name: "Charlie", avatar: "/avatar3.png" },
+  ];
+
   return (
     <div className="w-64 h-full bg-gray-100 p-4 shadow-md">
       {/* Channels Section */}
       <div className="mb-6">
-        <Text className="text-lg font-semibold text-gray-800">Channels</Text>
-        <List
-          itemLayout="horizontal"
-          dataSource={channels}
-          renderItem={(channel) => (
-            <List.Item key={channel.id} className="flex items-center space-x-3">
-              {channel.icon}
-              <Text>{channel.name}</Text>
-            </List.Item>
-          )}
-        />
+        <p className="text-lg font-semibold text-gray-800">Channels</p>
+        <ul>
+          {channels.map((channel) => (
+            <li key={channel.id} className="flex items-center space-x-3 py-2">
+              <FaComments />
+              <span>{channel.name}</span>
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <Divider />
+      <hr className="my-4" />
 
       {/* Direct Messages Section */}
       <div>
-        <Text className="text-lg font-semibold text-gray-800">
-          Direct Messages
-        </Text>
-        <List
-          itemLayout="horizontal"
-          dataSource={directMessages}
-          renderItem={(user) => (
-            <List.Item key={user.id} className="flex items-center space-x-3">
-              <Avatar src={user.avatar} />
-              <Text>{user.name}</Text>
-            </List.Item>
-          )}
-        />
+        <p className="text-lg font-semibold text-gray-800">Direct Messages</p>
+        <ul>
+          {directMessages.map((user) => (
+            <li key={user.id} className="flex items-center space-x-3 py-2">
+              <Image
+                src={user.avatar}
+                alt={`${user.name}'s avatar`}
+                width={360}
+                height={360}
+                className="w-8 h-8 rounded-full"
+              />
+              <span>{user.name}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

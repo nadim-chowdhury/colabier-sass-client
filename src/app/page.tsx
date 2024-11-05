@@ -1,3 +1,5 @@
+"use client";
+
 import ComparisonSection from "@/components/Home/ComparisonSection";
 import DemoSection from "@/components/Home/DemoSection";
 import FAQSection from "@/components/Home/FAQSection";

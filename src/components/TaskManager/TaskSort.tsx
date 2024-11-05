@@ -1,3 +1,5 @@
+"use client";
+
 import { Radio, Typography } from "antd";
 
 const { Text } = Typography;

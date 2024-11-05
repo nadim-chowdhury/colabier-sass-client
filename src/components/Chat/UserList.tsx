@@ -1,8 +1,6 @@
 "use client";
 
-import { Avatar, List, Typography } from "antd";
-
-const { Text } = Typography;
+import Image from "next/image";
 
 interface User {
   id: number;
@@ -20,27 +18,30 @@ const users: User[] = [
 export default function UserList() {
   return (
     <div className="p-4 bg-white rounded-lg shadow-md">
-      <Text className="text-lg font-semibold text-gray-800 mb-2">
-        Online Users
-      </Text>
-      <List
-        dataSource={users}
-        renderItem={(user) => (
-          <List.Item className="flex items-center space-x-3">
-            <Avatar src={user.avatar} />
+      <p className="text-lg font-semibold text-gray-800 mb-2">Online Users</p>
+      <ul className="space-y-4">
+        {users.map((user) => (
+          <li key={user.id} className="flex items-center space-x-3">
+            <Image
+              src={user.avatar}
+              alt={`${user.name}'s avatar`}
+              width={360}
+              height={360}
+              className="w-10 h-10 rounded-full"
+            />
             <div className="flex flex-col">
-              <Text className="font-medium">{user.name}</Text>
-              <Text
+              <p className="font-medium">{user.name}</p>
+              <p
                 className={`text-xs ${
                   user.online ? "text-green-500" : "text-gray-400"
                 }`}
               >
                 {user.online ? "Online" : "Offline"}
-              </Text>
+              </p>
             </div>
-          </List.Item>
-        )}
-      />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

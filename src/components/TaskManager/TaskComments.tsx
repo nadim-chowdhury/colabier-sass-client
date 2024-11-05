@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { List, Avatar, Input, Button, Typography } from "antd";
 

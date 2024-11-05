@@ -1,3 +1,5 @@
+"use client";
+
 import { Typography, Menu, Button } from "antd";
 import {
   ProjectOutlined,

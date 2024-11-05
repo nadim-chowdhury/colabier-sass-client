@@ -20,7 +20,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white px-4 md:px-6 py-4">
+    <header className="bg-white px-4 md:px-6 py-4 w-full">
       <div className="flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center transition duration-300">

@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Input, Button } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { FaSearch } from "react-icons/fa";
 
 interface SearchMessagesProps {
   onSearch: (query: string) => void;
@@ -19,19 +18,20 @@ export default function SearchMessages({ onSearch }: SearchMessagesProps) {
 
   return (
     <div className="flex items-center p-2 bg-gray-100 rounded-lg">
-      <Input
+      <input
+        type="text"
         placeholder="Search messages..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        onPressEnter={handleSearch}
-        className="flex-grow"
+        onKeyPress={(e) => e.key === "Enter" && handleSearch()}
+        className="flex-grow p-2 border rounded-lg outline-none"
       />
-      <Button
-        type="primary"
-        icon={<SearchOutlined />}
+      <button
         onClick={handleSearch}
-        className="ml-2 bg-cyan-600 hover:bg-cyan-700"
-      />
+        className="ml-2 bg-cyan-600 text-white p-2 rounded-lg hover:bg-cyan-700 flex items-center justify-center focus:outline-none"
+      >
+        <FaSearch />
+      </button>
     </div>
   );
 }

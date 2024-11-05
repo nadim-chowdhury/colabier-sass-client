@@ -1,5 +1,8 @@
+"use client";
+
 import { useState } from "react";
 import { Form, Input, Button, Select, DatePicker } from "antd";
+import moment from "moment"; // Import moment
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -65,7 +68,10 @@ export default function TaskForm({ initialTask, onSave }: TaskFormProps) {
         <DatePicker
           value={task.dueDate ? moment(task.dueDate) : null}
           onChange={(date, dateString) =>
-            setTask({ ...task, dueDate: dateString })
+            setTask({
+              ...task,
+              dueDate: typeof dateString === "string" ? dateString : "",
+            })
           }
           className="w-full"
         />

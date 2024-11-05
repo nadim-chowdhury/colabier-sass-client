@@ -1,3 +1,5 @@
+"use client";
+
 import { DatePicker, Typography } from "antd";
 import moment from "moment";
 
