@@ -1,5 +1,8 @@
+"use client";
+
 import { Upload, Button, Typography } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import { UploadChangeParam, RcFile } from "antd/es/upload";
 
 const { Text } = Typography;
 
@@ -8,9 +11,9 @@ interface ImageUploadProps {
 }
 
 export default function ImageUpload({ onUpload }: ImageUploadProps) {
-  const handleUpload = (info: any) => {
-    if (info.file.status === "done") {
-      const url = URL.createObjectURL(info.file.originFileObj);
+  const handleUpload = (info: UploadChangeParam) => {
+    if (info.file.status === "done" && info.file.originFileObj) {
+      const url = URL.createObjectURL(info.file.originFileObj as RcFile);
       onUpload(url);
     }
   };
@@ -19,7 +22,7 @@ export default function ImageUpload({ onUpload }: ImageUploadProps) {
     <div className="p-4 bg-white rounded-lg shadow-md">
       <Text className="text-lg font-semibold">Upload Image</Text>
       <Upload
-        customRequest={({ file, onSuccess }) => {
+        customRequest={({ onSuccess }) => {
           setTimeout(() => onSuccess && onSuccess("ok"), 0);
         }}
         onChange={handleUpload}

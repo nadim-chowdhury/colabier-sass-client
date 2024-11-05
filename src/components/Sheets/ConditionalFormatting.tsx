@@ -1,11 +1,18 @@
+"use client";
+
 import { useState } from "react";
 import { Select, Input, Button, Typography } from "antd";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 
+interface Format {
+  value: string;
+  color: string;
+}
+
 interface ConditionalFormattingProps {
-  onApplyCondition: (condition: string, format: any) => void;
+  onApplyCondition: (condition: string, format: Format) => void;
 }
 
 export default function ConditionalFormatting({
@@ -16,7 +23,7 @@ export default function ConditionalFormatting({
   const [format, setFormat] = useState<string>("#ffcccc");
 
   const applyCondition = () => {
-    onApplyCondition(condition, { value, format });
+    onApplyCondition(condition, { value, color: format });
     setValue("");
   };
 

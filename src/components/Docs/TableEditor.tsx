@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { Button, Input, Table, Typography } from "antd";
+"use client";
 
-const { Title } = Typography;
+import { useState } from "react";
 
 interface TableEditorProps {
   onTableUpdate: (data: string[][]) => void;
@@ -29,27 +28,50 @@ export default function TableEditor({ onTableUpdate }: TableEditorProps) {
 
   return (
     <div className="p-4 bg-white rounded-lg shadow-md">
-      <Title level={4}>Table Editor</Title>
-      <div className="flex space-x-2 mb-2">
-        <Button onClick={addRow}>Add Row</Button>
-        <Button onClick={addColumn}>Add Column</Button>
+      <h4 className="text-lg font-semibold mb-4">Table Editor</h4>
+      <div className="flex space-x-2 mb-4">
+        <button
+          onClick={addRow}
+          className="px-4 py-2 bg-blue-500 text-white rounded"
+        >
+          Add Row
+        </button>
+        <button
+          onClick={addColumn}
+          className="px-4 py-2 bg-blue-500 text-white rounded"
+        >
+          Add Column
+        </button>
       </div>
-      <Table
-        dataSource={rows.map((row, i) => ({ key: i, row }))}
-        columns={rows[0].map((_, colIndex) => ({
-          title: `Col ${colIndex + 1}`,
-          dataIndex: ["row", colIndex],
-          render: (_, __, rowIndex) => (
-            <Input
-              value={rows[rowIndex][colIndex]}
-              onChange={(e) =>
-                handleCellChange(rowIndex, colIndex, e.target.value)
-              }
-            />
-          ),
-        }))}
-        pagination={false}
-      />
+      <table className="w-full border border-gray-300">
+        <thead>
+          <tr>
+            {rows[0].map((_, colIndex) => (
+              <th key={colIndex} className="border border-gray-300 p-2">
+                Col {colIndex + 1}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {row.map((cell, colIndex) => (
+                <td key={colIndex} className="border border-gray-300 p-2">
+                  <input
+                    type="text"
+                    value={cell}
+                    onChange={(e) =>
+                      handleCellChange(rowIndex, colIndex, e.target.value)
+                    }
+                    className="w-full p-1"
+                  />
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

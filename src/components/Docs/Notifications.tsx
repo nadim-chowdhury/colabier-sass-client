@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { List, Alert, Typography } from "antd";
+import { Alert, Typography } from "antd";
 
 const { Text } = Typography;
 

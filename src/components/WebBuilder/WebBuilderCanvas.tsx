@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import Element from "./Element";
 
@@ -14,6 +16,7 @@ export default function WebBuilderCanvas() {
   const addElement = (element: ElementData) => {
     setElements([...elements, element]);
   };
+  console.log("addElement ~ addElement:", addElement);
 
   return (
     <div className="relative bg-gray-100 w-full h-full p-4 border border-gray-300 rounded-md">

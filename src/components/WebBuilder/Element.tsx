@@ -1,5 +1,6 @@
+"use client";
+
 import Image from "next/image";
-import React from "react";
 
 interface ElementProps {
   id: string;
@@ -8,7 +9,7 @@ interface ElementProps {
   style: React.CSSProperties;
 }
 
-export default function Element({ id, type, content, style }: ElementProps) {
+export default function Element({ type, content, style }: ElementProps) {
   return (
     <div className="p-2 border border-gray-300 rounded" style={style}>
       {type === "text" && <p>{content}</p>}

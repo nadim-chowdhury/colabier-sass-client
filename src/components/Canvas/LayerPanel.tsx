@@ -1,3 +1,5 @@
+"use client";
+
 import { List, Button, Typography } from "antd";
 import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
 

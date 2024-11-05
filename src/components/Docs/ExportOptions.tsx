@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Typography } from "antd";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
@@ -13,7 +15,12 @@ export default function ExportOptions({ content }: ExportOptionsProps) {
     const pdf = new jsPDF("p", "mm", "a4");
     const canvas = await html2canvas(document.body);
     const imgData = canvas.toDataURL("image/png");
-    pdf.addImage(imgData, "PNG", 10, 10);
+
+    // Calculate image dimensions to fit A4 page while maintaining aspect ratio
+    const imgWidth = 190; // A4 width - margins
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
     pdf.save("document.pdf");
   };
 

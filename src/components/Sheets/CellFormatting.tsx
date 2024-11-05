@@ -1,16 +1,13 @@
-import { Button, Tooltip, Divider, Typography } from "antd";
-import {
-  BoldOutlined,
-  ItalicOutlined,
-  BgColorsOutlined,
-  FontColorsOutlined,
-} from "@ant-design/icons";
-import { useState } from "react";
+"use client";
 
-const { Title } = Typography;
+import { useState } from "react";
+import { Button, Tooltip, Divider, Typography } from "antd";
+import { BoldOutlined, ItalicOutlined } from "@ant-design/icons";
+
+const { Title, Text } = Typography;
 
 interface CellFormattingProps {
-  onApplyFormatting: (format: string, value: any) => void;
+  onApplyFormatting: (format: string, value: boolean | string) => void;
 }
 
 export default function CellFormatting({
@@ -38,7 +35,7 @@ export default function CellFormatting({
       </div>
       <Divider />
       <div className="mb-4">
-        <Typography.Text>Background Color</Typography.Text>
+        <Text>Background Color</Text>
         <input
           type="color"
           value={bgColor}
@@ -50,7 +47,7 @@ export default function CellFormatting({
         />
       </div>
       <div>
-        <Typography.Text>Text Color</Typography.Text>
+        <Text>Text Color</Text>
         <input
           type="color"
           value={textColor}

@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { List, Button, Typography } from "antd";
+"use client";
 
-const { Title } = Typography;
+import { useState } from "react";
 
 interface Version {
   id: string;
@@ -27,23 +26,27 @@ export default function VersionHistory({
 
   return (
     <div className="p-4 bg-white rounded-lg shadow-md">
-      <Title level={4}>Version History</Title>
-      <List
-        dataSource={versions}
-        renderItem={(version) => (
-          <List.Item
-            actions={[
-              <Button onClick={() => handleRestore(version)}>Restore</Button>,
-            ]}
+      <h4 className="text-lg font-semibold mb-4">Version History</h4>
+      <ul className="space-y-2">
+        {versions.map((version) => (
+          <li
+            key={version.id}
+            className="flex justify-between items-center border-b border-gray-300 pb-2"
           >
-            <Typography.Text>{version.timestamp}</Typography.Text>
-          </List.Item>
-        )}
-      />
+            <span>{version.timestamp}</span>
+            <button
+              onClick={() => handleRestore(version)}
+              className="px-4 py-1 bg-blue-500 text-white rounded"
+            >
+              Restore
+            </button>
+          </li>
+        ))}
+      </ul>
       {selectedVersion && (
         <div className="mt-4">
-          <Title level={5}>Selected Version</Title>
-          <Typography.Paragraph>{selectedVersion.content}</Typography.Paragraph>
+          <h5 className="text-md font-semibold">Selected Version</h5>
+          <p>{selectedVersion.content}</p>
         </div>
       )}
     </div>

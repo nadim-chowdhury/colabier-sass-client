@@ -1,13 +1,20 @@
+"use client";
+
 import { useState } from "react";
 import { Button, List, Typography } from "antd";
 
 const { Title } = Typography;
 
+interface Sheet {
+  id: number;
+  name: string;
+}
+
 interface SidebarProps {
-  sheets: string[];
-  onSelectSheet: (sheetName: string) => void;
+  sheets: Sheet[];
+  onSelectSheet: (sheetId: number) => void;
   onAddSheet: () => void;
-  onDeleteSheet: (sheetName: string) => void;
+  onDeleteSheet: (sheetId: number) => void;
 }
 
 export default function Sidebar({
@@ -16,11 +23,13 @@ export default function Sidebar({
   onAddSheet,
   onDeleteSheet,
 }: SidebarProps) {
-  const [selectedSheet, setSelectedSheet] = useState<string>(sheets[0] || "");
+  const [selectedSheet, setSelectedSheet] = useState<number>(
+    sheets[0]?.id || 0
+  );
 
-  const handleSheetClick = (sheetName: string) => {
-    setSelectedSheet(sheetName);
-    onSelectSheet(sheetName);
+  const handleSheetClick = (sheetId: number) => {
+    setSelectedSheet(sheetId);
+    onSelectSheet(sheetId);
   };
 
   return (
@@ -28,17 +37,25 @@ export default function Sidebar({
       <Title level={4}>Sheets</Title>
       <List
         dataSource={sheets}
-        renderItem={(sheetName) => (
+        renderItem={(sheet) => (
           <List.Item
-            onClick={() => handleSheetClick(sheetName)}
+            onClick={() => handleSheetClick(sheet.id)}
             className={`cursor-pointer ${
-              selectedSheet === sheetName ? "font-bold" : ""
+              selectedSheet === sheet.id ? "font-bold" : ""
             }`}
             actions={[
-              <Button onClick={() => onDeleteSheet(sheetName)}>Delete</Button>,
+              <Button
+                key={sheet.id}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDeleteSheet(sheet.id);
+                }}
+              >
+                Delete
+              </Button>,
             ]}
           >
-            {sheetName}
+            {sheet.name}
           </List.Item>
         )}
       />

@@ -1,5 +1,7 @@
-import { Button, List, Typography } from "antd";
+"use client";
+
 import { useState } from "react";
+import { Button, List, Typography } from "antd";
 
 const { Title } = Typography;
 

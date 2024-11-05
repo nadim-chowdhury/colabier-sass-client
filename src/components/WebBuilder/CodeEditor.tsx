@@ -1,5 +1,7 @@
-import { Tabs, Input, Button, Typography } from "antd";
+"use client";
+
 import { useState } from "react";
+import { Tabs, Input, Button, Typography } from "antd";
 
 const { Title } = Typography;
 const { TextArea } = Input;

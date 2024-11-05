@@ -1,10 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import { Button, Slider, Typography } from "antd";
 import {
   ZoomInOutlined,
   ZoomOutOutlined,
   RedoOutlined,
 } from "@ant-design/icons";
-import { useState } from "react";
 
 const { Text } = Typography;
 

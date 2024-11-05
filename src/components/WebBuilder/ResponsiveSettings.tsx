@@ -1,3 +1,5 @@
+"use client";
+
 import { Select, Typography } from "antd";
 
 const { Title } = Typography;

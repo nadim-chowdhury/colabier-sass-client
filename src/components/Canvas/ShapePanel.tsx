@@ -1,3 +1,5 @@
+"use client";
+
 import { Typography, Button, InputNumber } from "antd";
 import ColorPicker from "./ColorPicker";
 
@@ -44,7 +46,9 @@ export default function ShapePanel({
           min={10}
           max={500}
           value={width}
-          onChange={onWidthChange}
+          onChange={(value) => {
+            if (value !== null) onWidthChange(value);
+          }}
           className="w-full"
         />
       </div>
@@ -55,7 +59,9 @@ export default function ShapePanel({
           min={10}
           max={500}
           value={height}
-          onChange={onHeightChange}
+          onChange={(value) => {
+            if (value !== null) onHeightChange(value);
+          }}
           className="w-full"
         />
       </div>

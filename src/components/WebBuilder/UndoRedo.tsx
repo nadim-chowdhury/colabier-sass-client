@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Tooltip } from "antd";
 import { UndoOutlined, RedoOutlined } from "@ant-design/icons";
 

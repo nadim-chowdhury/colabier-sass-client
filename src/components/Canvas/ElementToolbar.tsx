@@ -1,3 +1,5 @@
+"use client";
+
 import { FaTrash, FaCopy, FaArrowUp, FaArrowDown } from "react-icons/fa";
 
 interface ElementToolbarProps {

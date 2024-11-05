@@ -1,3 +1,5 @@
+"use client";
+
 import { Switch, Typography, Select, Divider } from "antd";
 
 const { Title } = Typography;

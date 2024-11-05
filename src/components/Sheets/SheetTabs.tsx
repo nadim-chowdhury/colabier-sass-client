@@ -1,6 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import { Tabs, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { useState } from "react";
 
 const { TabPane } = Tabs;
 

@@ -1,4 +1,6 @@
-import { Upload, Typography, message } from "antd";
+"use client";
+
+import { Upload, Typography, message, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
@@ -8,7 +10,7 @@ interface MediaUploadProps {
 }
 
 export default function MediaUpload({ onUpload }: MediaUploadProps) {
-  const handleUpload = (file: any) => {
+  const handleUpload = (file: File) => {
     const fileUrl = URL.createObjectURL(file);
     onUpload(fileUrl);
     message.success(`${file.name} uploaded successfully.`);

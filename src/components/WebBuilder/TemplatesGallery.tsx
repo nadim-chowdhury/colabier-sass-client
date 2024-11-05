@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, Typography, Button } from "antd";
 import Image from "next/image";
 import { useState } from "react";
@@ -36,6 +38,7 @@ export default function TemplatesGallery({
             cover={<Image alt={template.name} src={template.preview} />}
             actions={[
               <Button
+                key={template.id}
                 type={selectedTemplate === template.id ? "primary" : "default"}
                 onClick={() => handleSelectTemplate(template.id)}
               >

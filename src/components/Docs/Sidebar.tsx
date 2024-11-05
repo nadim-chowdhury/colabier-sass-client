@@ -1,6 +1,7 @@
 import { Menu } from "antd";
 import { FileTextOutlined, FolderOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
+import type { MenuInfo } from "rc-menu/lib/interface"; // Import the MenuInfo type
 
 const { Title } = Typography;
 
@@ -9,7 +10,7 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ onSelectSection }: SidebarProps) {
-  const handleClick = (e: any) => {
+  const handleClick = (e: MenuInfo) => {
     if (onSelectSection) {
       onSelectSection(e.key);
     }

@@ -1,15 +1,36 @@
+"use client";
+
 import { Input, InputNumber, Typography, Divider } from "antd";
 import ColorPicker from "./ColorPicker";
 
 const { Text } = Typography;
 
+interface TextProperties {
+  content: string;
+  color: string;
+  fontSize: number | null;
+}
+
+interface ShapeProperties {
+  color: string;
+  width: number | null;
+  height: number | null;
+}
+
+interface ImageProperties {
+  width: number | null;
+  height: number | null;
+}
+
+type ElementProperties = TextProperties | ShapeProperties | ImageProperties;
+
 interface PropertyPanelProps {
   element: {
     id: string;
     type: "text" | "shape" | "image";
-    properties: any;
+    properties: ElementProperties;
   };
-  onUpdate: (newProperties: any) => void;
+  onUpdate: (newProperties: Partial<ElementProperties>) => void;
 }
 
 export default function PropertyPanel({
@@ -27,13 +48,13 @@ export default function PropertyPanel({
           <Divider />
           <Text>Content</Text>
           <Input
-            value={properties.content}
+            value={(properties as TextProperties).content}
             onChange={(e) => onUpdate({ content: e.target.value })}
           />
           <Divider />
           <Text>Color</Text>
           <ColorPicker
-            color={properties.color}
+            color={(properties as TextProperties).color}
             onChange={(color) => onUpdate({ color })}
           />
           <Divider />
@@ -41,7 +62,7 @@ export default function PropertyPanel({
           <InputNumber
             min={10}
             max={100}
-            value={properties.fontSize}
+            value={(properties as TextProperties).fontSize ?? undefined}
             onChange={(value) => onUpdate({ fontSize: value })}
           />
         </>
@@ -52,7 +73,7 @@ export default function PropertyPanel({
           <Divider />
           <Text>Color</Text>
           <ColorPicker
-            color={properties.color}
+            color={(properties as ShapeProperties).color}
             onChange={(color) => onUpdate({ color })}
           />
           <Divider />
@@ -60,14 +81,14 @@ export default function PropertyPanel({
           <InputNumber
             min={10}
             max={500}
-            value={properties.width}
+            value={(properties as ShapeProperties).width ?? undefined}
             onChange={(value) => onUpdate({ width: value })}
           />
           <Text>Height</Text>
           <InputNumber
             min={10}
             max={500}
-            value={properties.height}
+            value={(properties as ShapeProperties).height ?? undefined}
             onChange={(value) => onUpdate({ height: value })}
           />
         </>
@@ -80,14 +101,14 @@ export default function PropertyPanel({
           <InputNumber
             min={10}
             max={500}
-            value={properties.width}
+            value={(properties as ImageProperties).width ?? undefined}
             onChange={(value) => onUpdate({ width: value })}
           />
           <Text>Height</Text>
           <InputNumber
             min={10}
             max={500}
-            value={properties.height}
+            value={(properties as ImageProperties).height ?? undefined}
             onChange={(value) => onUpdate({ height: value })}
           />
         </>

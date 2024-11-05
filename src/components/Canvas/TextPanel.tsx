@@ -1,3 +1,5 @@
+"use client";
+
 import { Typography, Select, InputNumber } from "antd";
 import ColorPicker from "./ColorPicker";
 
@@ -31,7 +33,9 @@ export default function TextPanel({
           min={10}
           max={100}
           value={fontSize}
-          onChange={onFontSizeChange}
+          onChange={(value) => {
+            if (value !== null) onFontSizeChange(value);
+          }}
           className="w-full"
         />
       </div>

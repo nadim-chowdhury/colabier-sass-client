@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, Button, Typography } from "antd";
 
 const { Title } = Typography;
@@ -27,6 +29,7 @@ export default function ComponentLibrary({
             cover={<div className="p-4">{component.preview}</div>}
             actions={[
               <Button
+                key={component.id}
                 type="primary"
                 onClick={() => onAddComponent(component.id)}
               >

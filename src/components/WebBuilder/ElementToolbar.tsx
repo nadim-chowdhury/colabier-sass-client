@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Tooltip } from "antd";
 import { DeleteOutlined, CopyOutlined, EditOutlined } from "@ant-design/icons";
 

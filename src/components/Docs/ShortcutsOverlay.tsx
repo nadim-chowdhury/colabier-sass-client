@@ -1,7 +1,9 @@
-import { Modal, List, Typography, Button } from "antd";
-import { useState } from "react";
+"use client";
 
-const { Title, Text } = Typography;
+import { useState } from "react";
+import { Modal, List, Typography, Button } from "antd";
+
+const { Text } = Typography;
 
 export default function ShortcutsOverlay() {
   const [isVisible, setIsVisible] = useState(false);

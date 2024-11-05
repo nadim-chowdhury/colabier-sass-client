@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Typography } from "antd";
 import { UploadOutlined, DownloadOutlined } from "@ant-design/icons";
 
@@ -18,15 +20,24 @@ export default function ImportExportPanel({
     }
   };
 
+  const triggerFileInputClick = () => {
+    const fileInput = document.querySelector(
+      "input[type='file']"
+    ) as HTMLInputElement;
+    fileInput?.click();
+  };
+
   return (
     <div className="p-4 bg-white rounded-lg shadow-md">
       <Title level={5}>Import & Export</Title>
       <div className="mb-2">
-        <input type="file" onChange={handleFileChange} className="mb-2" />
-        <Button
-          icon={<UploadOutlined />}
-          onClick={() => document.querySelector("input[type='file']")?.click()}
-        >
+        <input
+          type="file"
+          onChange={handleFileChange}
+          className="mb-2"
+          style={{ display: "none" }}
+        />
+        <Button icon={<UploadOutlined />} onClick={triggerFileInputClick}>
           Import File
         </Button>
       </div>

@@ -1,5 +1,7 @@
-import { Alert, Typography } from "antd";
+"use client";
+
 import { useState } from "react";
+import { Alert, Typography } from "antd";
 
 const { Text } = Typography;
 
